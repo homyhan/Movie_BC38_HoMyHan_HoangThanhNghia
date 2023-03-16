@@ -8,5 +8,9 @@ export const AuthService ={
     fetchProfile(){
         const url = "/QuanLyNguoiDung/ThongTinTaiKhoan";
         return https.post(url);
+    },
+    signup(data) {
+        const url = "/QuanLyNguoiDung/DangKy";
+        return https.post(url, data);
     }
 }

@@ -1,0 +1,13 @@
+.movieList, .movieTab, .contactHome, .footer{
+    background-color: rgb(44, 44, 44);
+}
+.movieTab{
+    padding-bottom: 40px;
+}
+.contactHome{
+    background-image: url('https://wallpaper.dog/large/20493446.jpg');
+    /* background-image: url('https://cdn.wallpapersafari.com/53/70/centSR.jpg'); */
+    display: flex;
+    align-items: center;
+    background-attachment: fixed;
+}

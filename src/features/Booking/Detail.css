@@ -1,0 +1,26 @@
+.detail_banner{
+    height: 600px;
+    width: 100%;
+    /* background-color: red; */
+    padding-top: 90px;
+}
+.detail_intro{
+    background-color: rgba(255, 255, 255, 0.808);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 70%;
+    margin: auto;
+    height: 400px;
+    padding: 20px 40px;
+}
+.detail_intro .detail_left{
+    grid-column: 1/span 2;
+}
+.detail_intro .detail_left h3{
+    width: 50%;
+    text-align: center;
+}
+.detail_intro .detail_right{
+    grid-column: 3/span 2;
+    padding-top: 30px;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { clsx } from "clsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,9 +12,14 @@ const Header = () => {
   return (
     <div className="bg-black py-4">
       <div className="container flex mx-auto justify-between items-center">
-        <NavLink className="text-white text-4xl headermovie" to="/">
-          Movie
-        </NavLink>
+        <div>
+          <NavLink className="text-white text-4xl headermovie mr-4" to="/">
+            CyberMovie
+          </NavLink>
+          {userLogin?.maLoaiNguoiDung === 'QuanTri'?<NavLink className="text-white linkToAdmin" to="/admin">Admin</NavLink>:null}
+          
+        </div>
+
         <nav>
           {userLogin ? (
             <div style={{ display: "flex" }}>

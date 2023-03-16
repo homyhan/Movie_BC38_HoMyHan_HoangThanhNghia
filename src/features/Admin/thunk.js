@@ -8,7 +8,7 @@ export const fetchMovieList =(soTrang, maNhom, soPhanTuTrenTrang)=> async (dispa
           type: "SET_MOVIES_ADMIN",
           payload: res.data.content,
         });
-        console.log(res.data.content);
+        // console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +21,7 @@ export const fetchMovieList =(soTrang, maNhom, soPhanTuTrenTrang)=> async (dispa
           type: "SET_MOVIES_FULL_ADMIN",
           payload: res.data.content,
         });
-        console.log(res.data.content);
+        // console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -62,7 +62,7 @@ export function fetchMovieItem(id){
         type: "SET_MOVIE_ITEM",
         payload: res.data.content
       })
-     console.log(res.data.content);
+    //  console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +79,7 @@ export const fetchUserList =(soTrang, maNhom)=> async (dispatch) => {
         type: "SET_USER_LIST",
         payload: res.data.content,
       });
-      console.log(res.data.content);
+      // console.log(res.data.content);
   } catch (error) {
     console.log(error);
   }
@@ -111,7 +111,7 @@ export function fetchUserItem(id){
         type: "SET_USER_ITEM",
         payload: res.data.content
       })
-     console.log(res.data.content);
+    //  console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -121,7 +121,7 @@ export function fetchUserItem(id){
 export const updateUser = (data)=>async (dispatch)=>{
   try {
     const res = await movieList.updateUserItem(data);
-    console.log(res.data.content);
+    // console.log(res.data.content);
   } catch (error) {
     console.log(error);
   }
@@ -135,7 +135,7 @@ export const fetchUserSearch =(tuKhoa)=> async (dispatch) => {
         type: "SET_USER_LIST_SEARCH",
         payload: res.data.content,
       });
-      console.log(res.data.content);
+      // console.log(res.data.content);
   } catch (error) {
     console.log(error);
   }

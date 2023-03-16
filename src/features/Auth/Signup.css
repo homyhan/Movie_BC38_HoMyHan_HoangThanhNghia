@@ -1,0 +1,42 @@
+.pageSignup{
+    height: 100%;
+    background-image: url("https://bareillytoday.com/wp-content/uploads/2017/11/Movie-making4-1024x576.jpg");
+    background-size: cover;
+    display: block;
+}
+.contentSignup{
+    display: flex;
+    align-items: center;
+    height: 94%;
+    
+}
+.contentSignup .formSignup{
+    background-color: white;
+    padding: 46px 60px;
+    border-radius: 10px;
+    
+}
+.contentSignup .formSignup form{
+    width: 400px;
+}
+.contentSignup .formSignup label{
+    margin-bottom: 12px;
+}
+.contentSignup .formSignup input{
+    width: 400px;
+    border-radius: 8px;
+}
+.contentSignup .formSignup .btnSignup{
+    background-color: #eed96c;
+    border: none;
+}
+.contentSignup .formSignup .btnSignup:hover{
+    background-color: black;
+    color: white;
+    border: none;
+}
+.contentSignup .linktoSignin{
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: bold;
+}

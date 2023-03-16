@@ -1,7 +1,7 @@
 import {produce} from 'immer';
 const initialState ={
     user: null,
-    
+    userSignup: null,
 }
 
 export const authReducer = (state= initialState, {type, payload})=>{
@@ -14,6 +14,9 @@ export const authReducer = (state= initialState, {type, payload})=>{
             darft.user = null;
             localStorage.removeItem("TOKEN");
             localStorage.removeItem("USER_LOGIN");
+        }
+        if(type==="SIGNUP"){
+            darft.userSignup = payload
         }
     })
 }

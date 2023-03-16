@@ -1,0 +1,17 @@
+.header_layout{
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+}
+.content_layout{
+    height: 100%;
+}
+.bigLeftBar{
+    height: 100%;
+}
+.leftBar {
+  position: fixed;
+  /* width: 172px; */
+  height: 100%;
+  z-index: 3;
+}

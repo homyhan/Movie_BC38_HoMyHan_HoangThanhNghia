@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
-import { Button, Form, DatePicker, InputNumber, Select } from "antd";
+import {
+  Button,
+  Form,
+  DatePicker,
+  InputNumber,
+  Select,
+} from "antd";
 import LayoutAdmin from "../../../HOCs/LayoutAdmin";
 import { movieList } from "../services/adminService";
 import { useFormik } from "formik";
 import { useParams } from "react-router-dom";
-import moment from "moment";
+
 import { createBrowserHistory } from "history";
 import dayjs from "dayjs";
 let history = createBrowserHistory();
@@ -23,7 +29,7 @@ const ShowTime = (props) => {
     validationSchema: Yup.object().shape({
       ngayChieuGioChieu: Yup.string().required("Required"),
       maRap: Yup.string().required("Required"),
-      giaVe: Yup.string().required("Required"),
+      giaVe: Yup.string().required("Required")
     }),
     validateOnBlur: true,
     validateOnChange: true,
@@ -35,7 +41,7 @@ const ShowTime = (props) => {
       } catch (error) {
         console.log(error);
       }
-      console.log("values", values);
+      // console.log("values", values);
     },
   });
 
@@ -43,7 +49,7 @@ const ShowTime = (props) => {
     heThongRapChieu: [],
     cumRapChieu: [],
   });
-  console.log(state.heThongRapChieu);
+  // console.log(state.heThongRapChieu);
   useEffect(
     () => async () => {
       try {
@@ -60,33 +66,35 @@ const ShowTime = (props) => {
   );
 
   const handleChangeHeThongRap = async (value) => {
-    console.log("mahethongrap", value);
+    // console.log("mahethongrap", value);
     try {
       const res = await movieList.getInfoCumRap(value);
       setState({
         ...state,
         cumRapChieu: res.data.content,
       });
-      console.log(res.data.content);
+      // console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
   };
   const onOk = (value) => {
-    return formik.setFieldValue(
+   return formik.setFieldValue(
       "ngayChieuGioChieu",
       dayjs(value).format("DD/MM/YYYY hh:mm:ss")
     );
+    
   };
   const handleChangeCumRap = (values) => {
-    console.log(values);
+    // console.log(values);
     formik.setFieldValue("maRap", values);
   };
   const onChangeDate = (values) => {
-    return formik.setFieldValue(
+   return formik.setFieldValue(
       "ngayChieuGioChieu",
       dayjs(values).format("DD/MM/YYYY hh:mm:ss")
     );
+    
   };
   const onChangeInputNum = (value) => {
     formik.setFieldValue("giaVe", value);
@@ -120,6 +128,7 @@ const ShowTime = (props) => {
             onChange={handleChangeHeThongRap}
             placeholder="Theater system"
           />
+          
         </Form.Item>
 
         <Form.Item label="Theater cluster">
@@ -131,9 +140,7 @@ const ShowTime = (props) => {
             onChange={handleChangeCumRap}
             placeholder="Theater cluster"
           />
-          {formik.touched.maRap && formik.errors.maRap ? (
-            <p className="text-red-600 font-bold">{formik.errors.maRap}</p>
-          ) : null}
+          {formik.touched.maRap && formik.errors.maRap?<p className="text-red-600 font-bold">{formik.errors.maRap}</p>:null}
         </Form.Item>
 
         <Form.Item label="Show date and time">
@@ -143,19 +150,12 @@ const ShowTime = (props) => {
             onChange={onChangeDate}
             onOk={onOk}
           />
-          {formik.touched.ngayChieuGioChieu &&
-          formik.errors.ngayChieuGioChieu ? (
-            <p className="text-red-600 font-bold">
-              {formik.errors.ngayChieuGioChieu}
-            </p>
-          ) : null}
+          {formik.touched.ngayChieuGioChieu && formik.errors.ngayChieuGioChieu? <p className="text-red-600 font-bold">{formik.errors.ngayChieuGioChieu}</p>:null}
         </Form.Item>
 
         <Form.Item label="Price">
           <InputNumber min={75000} max={150000} onChange={onChangeInputNum} />
-          {formik.touched.giaVe && formik.errors.giaVe ? (
-            <p className="text-red-600 font-bold">{formik.errors.giaVe}</p>
-          ) : null}
+          {formik.touched.giaVe && formik.errors.giaVe? <p className="text-red-600 font-bold">{formik.errors.giaVe}</p>:null}
         </Form.Item>
 
         <Form.Item
@@ -164,16 +164,10 @@ const ShowTime = (props) => {
             span: 16,
           }}
         >
-          <Button
-            className="border-1 border-green-500 bg-green-500 text-white"
-            htmlType="submit"
-          >
+          <Button className="border-1 border-green-500 bg-green-500 text-white" htmlType="submit">
             Submit
           </Button>
-          <Button
-            className="ml-2 border-1 border-orange-400 text-orange-400"
-            onClick={() => history.back()}
-          >
+          <Button className="ml-2 border-1 border-orange-400 text-orange-400" onClick={()=>history.back()} >
             Cancel
           </Button>
         </Form.Item>
