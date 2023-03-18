@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .pageSignin{
     height: 100%;
     background-image: url("https://bareillytoday.com/wp-content/uploads/2017/11/Movie-making4-1024x576.jpg");

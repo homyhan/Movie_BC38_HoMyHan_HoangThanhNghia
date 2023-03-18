@@ -9,6 +9,7 @@ import "./seats.css";
 // import { movieServ } from "../../services/movieService";
 
 const Seats = () => {
+  <h1>abc</h1>
   // từ url => mã lịch chiếu
   const params = useParams();
   const scheduleId = params.id;
@@ -119,7 +120,7 @@ const Seats = () => {
         <div className="thongtinuser">
           <h2>Thông tin: </h2>
           <p >Họ tên: {user?.hoTen}</p>
-          <p >Email: {user?.email}</p>
+          <p className="text-xs">Email: {user?.email}</p>
         </div>
         <div>
           <button className="btnCheckout" onClick={()=>{

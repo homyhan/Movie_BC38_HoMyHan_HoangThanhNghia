@@ -47,16 +47,27 @@ const Signin = () => {
 
   return (
     <div className="pageSignin">
-      <HomeOutlined className="text-white text-2xl ml-3 mt-3" onClick={()=>navigate("/")}/>
+      <HomeOutlined className="text-white text-2xl ml-3 mt-3
+      " onClick={()=>navigate("/")}/>
       <div className="contentSignin">
-        <div className="mx-auto formSignin">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <div>
-                <label className="block">Username</label>
+        <div className="mx-auto formSignin
+        max-w-sm text-center
+        sm:max-w-md
+        
+        ">
+          <form 
+          className="max-w-10 max-h-30
+          "
+          onSubmit={handleSubmit}>
+            <div 
+            className="">
+              <div
+              className="">
+                <label className="block max-w-xs">Username</label>
                 <input
                   onChange={handleChange}
-                  className="p-3 mb-2 rounded-lg"
+                  className="p-3 mb-2 rounded-lg
+                  max-w-xs ml-0"
                   type="text"
                   name="taiKhoan"
                   placeholder="Username"
@@ -66,7 +77,8 @@ const Signin = () => {
                 <label className="block">Password</label>
                 <input
                   onChange={handleChange}
-                  className="p-3 mb-2 rounded-lg"
+                  className="p-3 mb-2 rounded-lg
+                  max-w-xs"
                   type="password"
                   name="matKhau"
                   placeholder="Password"

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .detail_banner{
     height: 600px;
     width: 100%;

@@ -53,19 +53,31 @@ const Signup = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="pageSignup">
+    <div className="pageSignup
+    ">
       <HomeOutlined
         className="text-white text-2xl ml-3 mt-3"
         onClick={() => navigate("/")}
       />
-      <div className="contentSignup">
-        <div className="mx-auto formSignup">
-          <form onSubmit={formik.handleSubmit}>
+      <div className="contentSignup
+      ">
+        <div className="mx-auto formSignup
+        max-w-sm
+        sm:max-w-md
+        md:max-w-xl">
+          <form 
+          className="text-left
+          md:text-center
+          " 
+          onSubmit={formik.handleSubmit}>
             <div>
               <div>
                 <label className="block">Account*</label>
                 <input
-                  className="w-60 p-3 mb-2"
+                  className="w-40 p-3 mb-2
+                  max-w-xs
+                  sm:max-w-sm
+                  "
                   type="text"
                   placeholder="Account"
                   name="taiKhoan"
@@ -81,7 +93,9 @@ const Signup = () => {
               <div>
                 <label className="block">Password*</label>
                 <input
-                  className="w-60 p-3 mb-2"
+                  className="w-60 p-3 mb-2
+                  max-w-xs
+                  sm:max-w-sm"
                   type="text"
                   placeholder="Password"
                   name="matKhau"
@@ -97,7 +111,9 @@ const Signup = () => {
               <div>
                 <label className="block">Email*</label>
                 <input
-                  className="w-60 p-3 mb-2"
+                  className="w-60 p-3 mb-2
+                  max-w-xs
+                  sm:max-w-sm"
                   type="text"
                   placeholder="Email"
                   name="email"
@@ -112,7 +128,9 @@ const Signup = () => {
               <div>
                 <label className="block">Phone*</label>
                 <input
-                  className="w-60 p-3 mb-2"
+                  className="w-60 p-3 mb-2
+                  max-w-xs
+                  sm:max-w-sm"
                   type="text"
                   placeholder="Phone"
                   name="soDt"
@@ -138,7 +156,9 @@ const Signup = () => {
               <div>
                 <label className="block">Fullname*</label>
                 <input
-                  className="w-60 p-3 mb-2"
+                  className="w-60 p-3 mb-2
+                  max-w-xs
+                  sm:max-w-sm"
                   type="text"
                   placeholder="Fullname"
                   name="hoTen"
@@ -149,7 +169,7 @@ const Signup = () => {
             <p className="text-red-600 font-bold">{formik.errors.hoTen}</p>
           ) : null }
               </div>
-              <div className="text-center">
+              <div className="text-left sm:text-left md:text-center">
               <Button htmlType="submit" className="btnSignup">
                 Signup
               </Button> <br></br>

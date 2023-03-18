@@ -32,11 +32,22 @@ const Detail = () => {
               style={{ width: "200px", height: "250px", objectFit:'cover' }}
               src={filmDetail?.hinhAnh}
             ></img>
-            <h3>{filmDetail?.tenPhim}</h3>
+            <h3 className="
+            text-xs inline 
+            sm:text-sm sm:inline sm:ml-2
+            md:text-xl md:block
+            lg:text-lg 
+            xl:block xl:text-xl xl:ml-0">
+              {filmDetail?.tenPhim}
+              </h3>
             
           </div>
-          <div className="detail_right">
-            <p>{filmDetail?.moTa}</p>
+          <div className="detail_right container">
+            <p className="text-xs text-black ml-4
+            sm:text-sm sm:text-black sm:ml-8 
+            md:text-md 
+            lg:text-lg lg:ml-0
+            xl:text-black xl:ml-0 xl:text-xl">{filmDetail?.moTa}</p>
           </div>
         </div>
       </div>
