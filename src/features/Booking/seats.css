@@ -11,10 +11,11 @@
 }
 .chair{
     /* padding: 10px; */
-    height: 40px;
-    width: 40px;
-    margin: 10px;
+    height: 27px;
+    width: 27px;
+    margin: 5px;
     cursor: pointer;
+    font-size: 12px;
     background-color: white;
 }
 .vip{
@@ -93,6 +94,34 @@
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
+.seats_content{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+@media screen and (max-width: 1000px){
+    .seats_content{
+        display: block !important;
+    }
+}
+@media screen and (max-width: 768px){
+    .chair{
+        /* padding: 10px; */
+        height: 25px;
+        width: 25px;
+        margin: 5px;
+        
+    }
+}
+@media screen and (max-width: 576px){
+    .chair{
+        /* padding: 10px; */
+        height: 20px;
+        width: 20px;
+        margin: 3px;
+        font-size: 8px;
+    }
+}
 
 /* Safari */
 @-webkit-keyframes spin {
@@ -128,3 +157,4 @@
     color: white;
     transform: scale(1.01);
 }
+

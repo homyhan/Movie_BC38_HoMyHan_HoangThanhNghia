@@ -28,3 +28,19 @@
     grid-column: 3/span 2;
     padding-top: 30px;
 }
+
+@media screen and (max-width: 768px){
+    .detail_intro{
+        display: block;
+    }
+    .detail_left h3{
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+    }
+    .detail_left img{
+        margin: 0 auto;
+        display: block;
+    }
+    
+}
