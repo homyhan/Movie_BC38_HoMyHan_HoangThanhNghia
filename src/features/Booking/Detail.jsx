@@ -61,7 +61,7 @@ const Detail = () => {
               key: index,
               children: item.cumRapChieu.map((itemCumRap) => {
                 return (
-                  <div className="grid grid-cols-2 text-center mb-2">
+                  <div className="grid grid-cols-2 text-center mb-2 ">
                     <b>{itemCumRap.tenCumRap}</b>
 
                     <Button
