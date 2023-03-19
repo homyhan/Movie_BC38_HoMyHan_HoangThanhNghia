@@ -15,9 +15,13 @@ import { addUser } from "../thunk";
 import { useNavigate } from "react-router-dom";
 import { movieList } from "../services/adminService";
 import { createBrowserHistory } from "history";
+import './User.css';
 let history = createBrowserHistory();
 
 const AddUser = () => {
+  const redirect = (page) => {
+    navigate("/" + page);
+  };
   const [state, setState] = useState({
     loaiNguoiDung: []
   })
@@ -91,6 +95,28 @@ const AddUser = () => {
   return (
     <LayoutAdmin>
       {contextHolder}
+      <div className="top2btn">
+        <div className="main2btn">
+        <Button
+          className="w-full mb-2 rounded-none"
+          onClick={() => {
+            redirect("admin");
+          }}
+        >
+          Movie Manager
+        </Button>
+        
+        <Button
+          onClick={() => {
+            redirect("admin/user");
+          }}
+          className="w-full rounded-none mb-2"
+        >
+          User Manager
+        </Button>
+        </div>
+        
+      </div>
       <h3 className="px-3">Add User</h3>
       <Form
         onSubmitCapture={formik.handleSubmit}

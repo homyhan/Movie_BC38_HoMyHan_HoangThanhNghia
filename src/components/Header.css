@@ -2,13 +2,57 @@
     font-family: 'Kaushan Script', cursive;
     text-decoration: none;
     color: #eed96c;
+    font-size: 32px;
 }
 .auth{
     text-decoration: none;
-    /* color: #eed96c; */
+    font-size: 26px;
 }
 .linkToAdmin{
     text-decoration: none;
     font-size: 20px;
     margin: 0 10px;
+}
+.nameuser{
+    font-size: 25px;
+}
+
+@media screen and (max-width: 992px){
+    .content-header{
+        padding: 0 20px;
+    }
+    .headermovie{
+        font-size: 20px;
+    }
+    .auth{
+        font-size: 16px;
+    }
+    .nameuser{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 768px){
+    .content-header{
+        padding: 0 20px;
+    }
+    .headermovie{
+        font-size: 20px;
+    }
+    .auth{
+        font-size: 16px;
+    }
+    .nameuser{
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 576px){
+    .content-header{
+        padding: 0 20px;
+    }
+    .headermovie{
+        font-size: 20px;
+    }
+    .auth{
+        font-size: 16px;
+    }
 }

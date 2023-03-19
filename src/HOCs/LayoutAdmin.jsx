@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import LeftBar from "../features/Admin/components/LeftBar";
+import './LayoutAdmin.css';
 
 const LayoutAdmin = (props) => {
   return (
@@ -17,8 +18,8 @@ const LayoutAdmin = (props) => {
               className="col-span-1 bg-slate-900 w-full"
             >
               <div
-                className="col-span-12 bg-slate-900 mt-20 border-solid border-12 border-gray-400 py-2"
-                style={{ position: "fixed", width:'172px', height: "100%", zIndex: "3" }}
+                className="col-span-12 bg-slate-900 mt-20 border-solid border-12 border-gray-400 py-2 leftbar"
+                
               >
                 <LeftBar></LeftBar>
               </div>

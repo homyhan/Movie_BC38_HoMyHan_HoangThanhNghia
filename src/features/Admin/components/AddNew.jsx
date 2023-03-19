@@ -15,14 +15,19 @@ import { useDispatch } from "react-redux";
 import { addMoive } from "../thunk";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import './User.css';
 const { TextArea } = Input;
 const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
+
 
 const AddNew = () => {
   const [imgSrc, setImgSrc] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const redirect = (page) => {
+    navigate("/" + page);
+  };
   const idGroup = JSON.parse(localStorage.getItem("USER_LOGIN")).maNhom;
   const formik = useFormik({
     initialValues: {
@@ -121,6 +126,28 @@ const AddNew = () => {
   return (
     <LayoutAdmin>
       {contextHolder}
+      <div className="top2btn">
+        <div className="main2btn">
+        <Button
+          className="w-full mb-2 rounded-none"
+          onClick={() => {
+            redirect("admin");
+          }}
+        >
+          Movie Manager
+        </Button>
+        
+        <Button
+          onClick={() => {
+            redirect("admin/user");
+          }}
+          className="w-full rounded-none mb-2"
+        >
+          User Manager
+        </Button>
+        </div>
+        
+      </div>
       <h3 className="px-3">Add Film</h3>
       <Form
         onSubmitCapture={formik.handleSubmit}

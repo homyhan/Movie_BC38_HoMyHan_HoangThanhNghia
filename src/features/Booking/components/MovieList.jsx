@@ -14,7 +14,7 @@ const MovieList = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-center text-7xl font-bold mb-10 pt-10 text-white titleMovieList">
+      <h1 className="text-center font-bold text-white titleMovieList">
         MovieList
       </h1>
       <div className="grid grid-cols-4 gap-6">

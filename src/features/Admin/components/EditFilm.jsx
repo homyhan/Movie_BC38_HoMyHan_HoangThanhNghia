@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addMoive, fetchMovieItem, updateMovie } from "../thunk";
 import { useNavigate, useParams } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import './User.css';
 let history = createBrowserHistory();
 
 const { TextArea } = Input;
@@ -27,6 +28,9 @@ const EditFilm = () => {
   const [imgSrc, setImgSrc] = useState("");
   const dispatch = useDispatch();
   const params = useParams();
+  const redirect = (page) => {
+    navigate("/" + page);
+  };
   const movieItem = params.id;
   useEffect(() => {
     dispatch(fetchMovieItem(movieItem));
@@ -146,6 +150,28 @@ const EditFilm = () => {
   return (
     <LayoutAdmin>
       {contextHolder}
+      <div className="top2btn">
+        <div className="main2btn">
+        <Button
+          className="w-full mb-2 rounded-none"
+          onClick={() => {
+            redirect("admin");
+          }}
+        >
+          Movie Manager
+        </Button>
+        
+        <Button
+          onClick={() => {
+            redirect("admin/user");
+          }}
+          className="w-full rounded-none mb-2"
+        >
+          User Manager
+        </Button>
+        </div>
+        
+      </div>
       <h3 className="px-3">Edit Film</h3>
       <Form
         onSubmitCapture={formik.handleSubmit}

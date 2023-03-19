@@ -2,111 +2,86 @@ import React, { useEffect, useState } from "react";
 import { AudioOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table, Modal, Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMovie, deleteUser, fetchMovieList, fetchUserList, fetchUserSearch } from "../thunk";
-import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  deleteMovie,
+  deleteUser,
+  fetchMovieList,
+  fetchUserList,
+  fetchUserSearch,
+} from "../thunk";
+import {
+  Navigate,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import LayoutAdmin from "../../../HOCs/LayoutAdmin";
 import { ExclamationCircleFilled, CalendarOutlined } from "@ant-design/icons";
 import { movieList } from "../services/adminService";
+import './User.css'
 // import { Button, Modal, Space } from 'antd';
 const { confirm } = Modal;
 const { Search } = Input;
-
-const onSearch = (value) => console.log(value);
-const columns = [
-  {
-    title: "Account",
-    dataIndex: "taiKhoan",
-    
-  },
-  {
-    title: "Fullname",
-    dataIndex: "hoTen",
-    
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-    
-    width: "28%",
-  },
-  {
-    title: "Phone",
-    dataIndex: "soDt",
-    
-    width: "300px",
-  },
-
-  {
-    title: "Action",
-    dataIndex: "action",
-  },
-];
 
 const idGroup = JSON.parse(localStorage.getItem("USER_LOGIN"))?.maNhom;
 
 const User = () => {
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const redirect = (page) => {
+    navigate("/" + page);
+  };
   const param = useParams();
   const navigate = useNavigate();
   const [searchParam, setSearchParam] = useSearchParams();
   const { userList, userListSearch } = useSelector((state) => state.admin);
 
-  // const debounce = (func, delay) => {
-  //   let timerId;
-  //   return (...args) => {
-  //     if (timerId) {
-  //       clearTimeout(timerId);
-  //     }
-  //     timerId = setTimeout(() => {
-  //       func(...args);
-  //     }, delay);
-  //   };
-  // };
-
-  // const handleSearch = debounce(async(value) => {
-  //   // Gửi yêu cầu tìm kiếm tại đây với giá trị tìm kiếm là "value"
-  //   console.log(value.trim());
-  //     try {
-  //       const res = await movieList.searchUserItem(value);
-        
-  //       console.log("res", res.data.content);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-    
-  //   console.log('Đã gửi yêu cầu tìm kiếm với giá trị:', value);
-  // }, 500); // Chờ đợi 500ms trước khi gửi yêu cầu tìm kiếm
-
+  
   const handleInputChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value.toLowerCase());
     // handleSearch(value);
   };
-  
+
   useEffect(() => {
     dispatch(fetchUserList(searchParam.get("page"), "GP01"));
-    // dispatch(fetchUserList(searchTerm));
-    // const fetchResults = async () => {
-    //   const results = await fetchUserSearch(searchTerm);
-    //   setSearchTerm(results);
-    // };
-    // fetchResults();
+    
   }, [dispatch, searchParam.get("page"), searchParam]);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchUserSearch(searchTerm.trim()));
-  }, [dispatch, searchTerm])
+  }, [dispatch, searchTerm]);
 
   if (!idGroup) {
     return <Navigate to="/signin"></Navigate>;
   }
   return (
     <LayoutAdmin>
+      <div className="top2btn">
+        <div className="main2btn">
+        <Button
+          className="w-full mb-2 rounded-none"
+          onClick={() => {
+            redirect("admin");
+          }}
+        >
+          Movie Manager
+        </Button>
+        
+        <Button
+          onClick={() => {
+            redirect("admin/user");
+          }}
+          className="w-full rounded-none mb-2"
+        >
+          User Manager
+        </Button>
+        </div>
+        
+      </div>
       <div className="text-right mb-4">
         <h2 className="text-left px-3">User Manager</h2>
-        <Button onClick={()=>navigate("/admin/user/adduser")}
-        >
+        <Button onClick={() => navigate("/admin/user/adduser")}>
           Add User
         </Button>{" "}
         <br />
@@ -120,114 +95,132 @@ const User = () => {
           />
         </Space>
       </div>
-      {searchTerm==='' || searchTerm.trim()==='' ? <> <Table
-        columns={columns}
-        pagination={false}
-        dataSource={userList?.items?.map((item) => {
-          return {
-            key: item.taiKhoan,
-            taiKhoan: item.taiKhoan,
-            hoTen: item.hoTen,
-            email: item.email,
-            soDt: item.soDt,
+      {searchTerm === "" || searchTerm.trim() === "" ? (
+        <>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Account</th>
+                <th>Fullname</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userList?.items?.map((item) => {
+                return (
+                  <tr key={item.taiKhoan}>
+                    <td>{item.taiKhoan}</td>
+                    <td>{item.hoTen}</td>
+                    <td>{item.email}</td>
+                    <td>{item.soDt}</td>
+                    <td>
+                      <span>
+                        <EditOutlined
+                          className="text-2xl"
+                          onClick={() => {
+                            navigate("/admin/user/edituser/" + item.taiKhoan);
+                          }}
+                        />
 
-            action: (
-              <span>
-                <EditOutlined 
-                  className="text-2xl"
-                  onClick={()=>{
-                    navigate("/admin/user/edituser/"+item.taiKhoan);
-                  }}
-                />
+                        <Button
+                          className="bg-red-600 text-white"
+                          onClick={() => {
+                            confirm({
+                              title: `Are you sure delete ${item.hoTen} ?`,
+                              icon: <ExclamationCircleFilled />,
+                              // content: 'Some descriptions',
+                              okText: "Yes",
+                              okType: "danger",
+                              cancelText: "No",
+                              onOk() {
+                                dispatch(deleteUser(item.taiKhoan));
+                                dispatch(
+                                  fetchUserList(searchParam.get("page"))
+                                );
+                              },
+                              onCancel() {
+                                console.log("Cancel");
+                              },
+                            });
+                          }}
+                        >
+                          <DeleteOutlined></DeleteOutlined>
+                        </Button>
 
-                <Button
-                  className="bg-red-600 text-white"
-                  onClick={()=>{
-                    confirm({
-                      title: `Are you sure delete ${item.hoTen} ?`,
-                      icon: <ExclamationCircleFilled />,
-                      // content: 'Some descriptions',
-                      okText: "Yes",
-                      okType: "danger",
-                      cancelText: "No",
-                      onOk() {
-                        dispatch(deleteUser(item.taiKhoan));
-                        dispatch(fetchUserList(searchParam.get("page")));
-                      },
-                      onCancel() {
-                        console.log("Cancel");
-                      },
-                    });
-                  }}
-                >
-                  <DeleteOutlined ></DeleteOutlined>
-                </Button>
-
-                {/* <CalendarOutlined className="text-green-600 text-xl"/> */}
-              </span>
-            ),
-          };
-        }
-        )}
-        
-      />
-      <Pagination className="text-center my-4" current={searchParam.get("page")===null? 1 : searchParam.get("page")*1} pageSize={10} total={userList?.totalCount} onChange={(page)=>{
+                        {/* <CalendarOutlined className="text-green-600 text-xl"/> */}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+             
+            </tbody>
+          </table>
+          <Pagination className="text-center my-4" current={searchParam.get("page")===null? 1 : searchParam.get("page")*1} pageSize={10} total={userList?.totalCount} onChange={(page)=>{
         setSearchParam({page})
       }}/>
-      </>
-      : <Table
-      columns={columns}
-      pagination={false}
-      dataSource={userListSearch?.map((item) => {
-        return {
-          key: item.taiKhoan,
-          taiKhoan: item.taiKhoan,
-          hoTen: item.hoTen,
-          email: item.email,
-          soDt: item.soDt,
+        </>
+      ) : <table className="table">
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Fullname</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {userListSearch?.map((item) => {
+          return (
+            <tr key={item.taiKhoan}>
+              <td>{item.taiKhoan}</td>
+              <td>{item.hoTen}</td>
+              <td>{item.email}</td>
+              <td>{item.soDt}</td>
+              <td>
+                <span>
+                  <EditOutlined
+                    className="text-2xl"
+                    onClick={() => {
+                      navigate("/admin/user/edituser/" + item.taiKhoan);
+                    }}
+                  />
 
-          action: (
-            <span>
-              <EditOutlined 
-                className="text-2xl"
-                onClick={()=>{
-                  navigate("/admin/user/edituser/"+item.taiKhoan);
-                }}
-              />
-
-              <Button
-                className="bg-red-600 text-white"
-                onClick={()=>{
-                  confirm({
-                    title: `Are you sure delete ${item.hoTen} ?`,
-                    icon: <ExclamationCircleFilled />,
-                    // content: 'Some descriptions',
-                    okText: "Yes",
-                    okType: "danger",
-                    cancelText: "No",
-                    onOk() {
-                      dispatch(deleteUser(item.taiKhoan));
-                      dispatch(fetchUserList(searchParam.get("page")));
-                    },
-                    onCancel() {
-                      console.log("Cancel");
-                    },
-                  });
-                }}
-              >
-                <DeleteOutlined ></DeleteOutlined>
-              </Button>
-
-              {/* <CalendarOutlined className="text-green-600 text-xl"/> */}
-            </span>
-          ),
-        };
-      }
-      )}
-      
-    /> }
-      
-      
+                  <Button
+                    className="bg-red-600 text-white"
+                    onClick={() => {
+                      confirm({
+                        title: `Are you sure delete ${item.hoTen} ?`,
+                        icon: <ExclamationCircleFilled />,
+                        // content: 'Some descriptions',
+                        okText: "Yes",
+                        okType: "danger",
+                        cancelText: "No",
+                        onOk() {
+                          dispatch(deleteUser(item.taiKhoan));
+                          dispatch(
+                            fetchUserList(searchParam.get("page"))
+                          );
+                        },
+                        onCancel() {
+                          console.log("Cancel");
+                        },
+                      });
+                    }}
+                  >
+                    <DeleteOutlined></DeleteOutlined>
+                  </Button>
+                </span>
+              </td>
+            </tr>
+          );
+        })}
+       
+      </tbody>
+    </table>}
     </LayoutAdmin>
   );
 };
