@@ -10,13 +10,13 @@ import './Home.css';
 import Contact from "./components/Contact";
 import Footer from "../../components/Footer";
 
-const contentStyle = {
-  height: "700px",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
+// const contentStyle = {
+//   height: "700px",
+//   color: "#fff",
+//   lineHeight: "160px",
+//   textAlign: "center",
+//   background: "#364d79",
+// };
 
 const HomeBooking = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const HomeBooking = () => {
           {banners.map((item, index) => {
             return (
               <div key={item.maBanner}>
-                <h3 style={contentStyle}>
+                <h3 className="contentCarousel" >
                   <img className="w-full" src={item.hinhAnh}></img>
                 </h3>
               </div>

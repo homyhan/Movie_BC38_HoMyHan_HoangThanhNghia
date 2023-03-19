@@ -18,12 +18,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { addMoive, addUser, fetchUserItem, updateUser } from "../thunk";
 import { useNavigate, useParams } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import './User.css';
 let history = createBrowserHistory();
 
 const EditUser = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const userItem = params.id;
+  const redirect = (page) => {
+    navigate("/" + page);
+  };
   useEffect(()=>{
      dispatch(fetchUserItem(userItem))
   }, [])
@@ -93,6 +97,28 @@ const EditUser = () => {
   return (
     <LayoutAdmin>
       {contextHolder}
+      <div className="top2btn">
+        <div className="main2btn">
+        <Button
+          className="w-full mb-2 rounded-none"
+          onClick={() => {
+            redirect("admin");
+          }}
+        >
+          Movie Manager
+        </Button>
+        
+        <Button
+          onClick={() => {
+            redirect("admin/user");
+          }}
+          className="w-full rounded-none mb-2"
+        >
+          User Manager
+        </Button>
+        </div>
+        
+      </div>
       <h3 className="px-3">Edit User</h3>
       <Form
         onSubmitCapture={formik.handleSubmit}

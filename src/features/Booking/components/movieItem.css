@@ -16,6 +16,10 @@
 .mvItem:hover .iconPlay{
     transform:translate(-50%, -50%) scale(1);
 }
+.imgMovieItem{
+    height: 250px;
+    object-fit: cover;
+}
 .bgHover{
     width: 100%;
     height: 100%;
@@ -72,4 +76,59 @@
 }
 .contentItemMovie:hover .name_desc_movieItem{
     display: none;
+}
+
+@media screen and (max-width: 992px){
+    .name_desc_movieItem h1{
+        font-size: 18px;
+    }
+    .ant-card .ant-card-body{
+        padding: 12px;
+    }
+    .name_desc_movieItem p{
+        display: none;
+    }
+    .customButtonHover{
+        display: none;
+    }
+    .imgMovieItem{
+        /* height: 100px; */
+        
+    }
+}
+@media screen and (max-width: 768px){
+    .name_desc_movieItem h1{
+        font-size: 18px;
+    }
+    .ant-card .ant-card-body{
+        padding: 12px;
+    }
+    .name_desc_movieItem p{
+        display: none;
+    }
+    .customButtonHover{
+        display: none;
+    }
+    .imgMovieItem{
+        /* height: 100px; */
+        
+    }
+}
+@media screen and (max-width: 576px){
+    .name_desc_movieItem h1{
+        font-size: 18px;
+    }
+    .ant-card .ant-card-body{
+        padding: 12px;
+    }
+    .name_desc_movieItem p{
+        display: none;
+    }
+    .customButtonHover{
+        display: none;
+    }
+    .imgMovieItem{
+        /* height: 100px; */
+        
+    }
 }

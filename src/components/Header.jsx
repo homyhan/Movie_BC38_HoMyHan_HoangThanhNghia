@@ -11,9 +11,9 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <div className="bg-black py-4">
-      <div className="container flex mx-auto justify-between items-center">
+      <div className="container flex mx-auto justify-between items-center content-header">
         <div>
-          <NavLink className="text-white text-4xl headermovie mr-4" to="/">
+          <NavLink className="text-white headermovie mr-4" to="/">
             CyberMovie
           </NavLink>
           {userLogin?.maLoaiNguoiDung === 'QuanTri'?<NavLink className="text-white linkToAdmin" to="/admin">Admin</NavLink>:null}
@@ -23,7 +23,7 @@ const Header = () => {
         <nav>
           {userLogin ? (
             <div style={{ display: "flex" }}>
-              <p className="text-white text-xl mr-2">Hello {userLogin.hoTen}</p>
+              <p className="text-white mr-2 nameuser">Hello {userLogin.hoTen}</p>
               <UserOutlined
                 style={{
                   height: "30px",
@@ -48,7 +48,7 @@ const Header = () => {
             <div>
               <NavLink
                 className={(params) => {
-                  const classes = "text-xl mr-5 font-semibold auth";
+                  const classes = " mr-5 font-semibold auth";
                   if (params.isActive) {
                     return clsx("text-yellow-300 ", classes);
                   }
@@ -60,7 +60,7 @@ const Header = () => {
               </NavLink>
               <NavLink
                 className={(params) => {
-                  const classes = "text-xl mr-5 font-semibold auth";
+                  const classes = " mr-5 font-semibold auth";
                   if (params.isActive) {
                     return clsx("text-yellow-300", classes);
                   }

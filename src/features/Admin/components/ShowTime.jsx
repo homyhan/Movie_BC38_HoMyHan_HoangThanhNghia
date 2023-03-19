@@ -10,15 +10,21 @@ import {
 import LayoutAdmin from "../../../HOCs/LayoutAdmin";
 import { movieList } from "../services/adminService";
 import { useFormik } from "formik";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { createBrowserHistory } from "history";
 import dayjs from "dayjs";
+import './User.css';
+
 let history = createBrowserHistory();
 
 const ShowTime = (props) => {
   const params = useParams();
   const idFilm = params.id;
+  const navigate = useNavigate();
+  const redirect = (page) => {
+    navigate("/" + page);
+  };
   const formik = useFormik({
     initialValues: {
       maPhim: idFilm,
@@ -101,6 +107,28 @@ const ShowTime = (props) => {
   };
   return (
     <LayoutAdmin>
+      <div className="top2btn">
+        <div className="main2btn">
+        <Button
+          className="w-full mb-2 rounded-none"
+          onClick={() => {
+            redirect("admin");
+          }}
+        >
+          Movie Manager
+        </Button>
+        
+        <Button
+          onClick={() => {
+            redirect("admin/user");
+          }}
+          className="w-full rounded-none mb-2"
+        >
+          User Manager
+        </Button>
+        </div>
+        
+      </div>
       <h3 className="px-3">Create Movie Showtimes</h3>
       <Form
         onSubmitCapture={formik.handleSubmit}

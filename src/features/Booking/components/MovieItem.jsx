@@ -25,8 +25,8 @@ const MovieItem = (props) => {
       cover={
         <div className="w-full mvItem">
           <img
-            className="w-full"
-            style={{ height: "250px", objectFit: "cover" }}
+            className="w-full imgMovieItem"
+            // style={{ height: "250px", objectFit: "cover" }}
             alt="example"
             src={props.item.hinhAnh}
           />
@@ -44,22 +44,23 @@ const MovieItem = (props) => {
         </div>
       }
     >
-      
-        <div className="name_desc_movieItem">
-          <h1 className="text-2xl font-bold text-white">
-            {props.item.tenPhim}
-          </h1>
-          <div
-            className="text-white"
-            style={{ width: "100%", overflow: "hidden", whiteSpace: "nowrap" }}
-          >
-            <p style={{ textOverflow: "ellipsis" }}>{props.item.moTa}</p>
-          </div>
+      <div className="name_desc_movieItem">
+        <h1 className="font-bold text-white">{props.item.tenPhim}</h1>
+        <div
+          className="text-white"
+          style={{ width: "100%", overflow: "hidden", whiteSpace: "nowrap" }}
+        >
+          <p style={{ textOverflow: "ellipsis" }}>{props.item.moTa}</p>
         </div>
-        <div className="customButtonHover">
-          <Button className="w-full mt-2 btnMovieItem" onClick={()=>navigate("/detail/"+props.item.maPhim)}>Book</Button>
-          
-        </div>      
+      </div>
+      <div className="customButtonHover">
+        <Button
+          className="w-full mt-2 btnMovieItem"
+          onClick={() => navigate("/detail/" + props.item.maPhim)}
+        >
+          Book
+        </Button>
+      </div>
 
       <Modal
         title="Trailer"

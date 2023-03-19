@@ -12,88 +12,10 @@ import {
 import LayoutAdmin from "../../../HOCs/LayoutAdmin";
 import { ExclamationCircleFilled, CalendarOutlined } from "@ant-design/icons";
 import HomeAdmin from "../HomeAdmin";
+import "./Film.css";
 // import { Button, Modal, Space } from 'antd';
 const { confirm } = Modal;
 const { Search } = Input;
-
-
-const columns = [
-  {
-    title: "ID Film",
-    dataIndex: "idFilm",
-    sorter: (a, b) => a.idFilm - b.idFilm,
-  },
-  {
-    title: "Image",
-    dataIndex: "img",
-    filters: [
-      {
-        text: "Joe",
-        value: "Joe",
-      },
-      {
-        text: "Category 1",
-        value: "Category 1",
-      },
-      {
-        text: "Category 2",
-        value: "Category 2",
-      },
-    ],
-    filterMode: "tree",
-    filterSearch: true,
-    onFilter: (value, record) => record.img.startsWith(value),
-  },
-  {
-    title: "NameFilm",
-    dataIndex: "name",
-    filters: [
-      {
-        text: "Joe",
-        value: "Joe",
-      },
-      {
-        text: "Category 1",
-        value: "Category 1",
-      },
-      {
-        text: "Category 2",
-        value: "Category 2",
-      },
-    ],
-    filterMode: "tree",
-    filterSearch: true,
-    onFilter: (value, record) => record.name.startsWith(value),
-    width: "28%",
-  },
-  {
-    title: "Description",
-    dataIndex: "desc",
-    filters: [
-      {
-        text: "Joe",
-        value: "Joe",
-      },
-      {
-        text: "Category 1",
-        value: "Category 1",
-      },
-      {
-        text: "Category 2",
-        value: "Category 2",
-      },
-    ],
-    filterMode: "tree",
-    filterSearch: true,
-    onFilter: (value, record) => record.desc.startsWith(value),
-    width: "400px",
-  },
-
-  {
-    title: "Action",
-    dataIndex: "action",
-  },
-];
 
 const idGroup = JSON.parse(localStorage.getItem("USER_LOGIN"))?.maNhom;
 
@@ -101,15 +23,17 @@ const Film = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParam, setSearchParam] = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const { movies, keySearch } = useSelector((state) => state.admin);
+  const redirect = (page) => {
+    navigate("/" + page);
+  };
   const moveToAddnew = () => {
     navigate("/admin/film/addnew");
   };
   // console.log(searchParam.get("page"));
   useEffect(() => {
     dispatch(fetchMovieList(searchParam.get("page"), idGroup, 10));
-    
   }, [dispatch, searchParam.get("page"), 10, searchTerm]);
 
   if (!idGroup) {
@@ -118,17 +42,39 @@ const Film = () => {
   const onSearch = (value) => {
     // console.log(value);
   };
-  const handleInputChange = (evt)=>{
+  const handleInputChange = (evt) => {
     const value = evt.target.value;
     dispatch({
       type: "SEARCH_FILM",
-      payload: value
+      payload: value,
     });
     setSearchTerm(value);
-  }
-  
+  };
+
   return (
     <LayoutAdmin>
+      <div className="top2btn">
+        <div className="main2btn">
+        <Button
+          className="w-full mb-2 rounded-none"
+          onClick={() => {
+            redirect("admin");
+          }}
+        >
+          Movie Manager
+        </Button>
+        
+        <Button
+          onClick={() => {
+            redirect("admin/user");
+          }}
+          className="w-full rounded-none mb-2"
+        >
+          User Manager
+        </Button>
+        </div>
+        
+      </div>
       <div className="text-right mb-4">
         <h2 className="text-left px-3">Movie Manager</h2>
         <Button
@@ -149,214 +95,180 @@ const Film = () => {
           />
         </Space>
       </div>
-        {keySearch.length===0? <>
-          <Table
-        columns={columns}
-        pagination={false}
-        dataSource={movies?.items?.map((item) => {
-          return {
-            key: item.maPhim,
-            idFilm: item.maPhim,
-            img: (
-              <img
-                style={{ height: "150px", width: "100px", objectFit: "cover" }}
-                src={item.hinhAnh}
-              ></img>
-            ),
-            name: item.tenPhim,
-            desc: item.moTa,
+      {keySearch.length === 0 ? (
+        <>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Namefilm</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {movies?.items?.map((item) => {
+                return (
+                  <tr key={item.maPhim}>
+                    <td>{item.maPhim}</td>
+                    <td>
+                      <img
+                        style={{
+                          height: "150px",
+                          width: "100px",
+                          objectFit: "cover",
+                        }}
+                        src={item.hinhAnh}
+                      ></img>
+                    </td>
+                    <td>{item.tenPhim}</td>
+                    <td>{item.moTa}</td>
+                    <td>
+                      <span>
+                        <EditOutlined
+                          onClick={() => {
+                            navigate("/admin/film/edit/" + item.maPhim);
+                          }}
+                          className="text-2xl"
+                        />
 
-            action: (
-              <span>
-                <EditOutlined
-                  onClick={() => {
-                    navigate("/admin/film/edit/" + item.maPhim);
-                  }}
-                  className="text-2xl"
-                />
+                        <Button
+                          className="bg-red-600 text-white"
+                          onClick={() => {
+                            confirm({
+                              title: `Are you sure delete ${item.tenPhim} ?`,
+                              icon: <ExclamationCircleFilled />,
+                              // content: 'Some descriptions',
+                              okText: "Yes",
+                              okType: "danger",
+                              cancelText: "No",
+                              onOk() {
+                                dispatch(deleteMovie(item.maPhim));
+                                dispatch(
+                                  fetchMovieList(
+                                    searchParam.get("page"),
+                                    idGroup,
+                                    10
+                                  )
+                                );
+                              },
+                              onCancel() {
+                                // console.log("Cancel");
+                              },
+                            });
+                          }}
+                        >
+                          <DeleteOutlined></DeleteOutlined>
+                        </Button>
 
-                <Button
-                  className="bg-red-600 text-white"
-                  onClick={() => {
-                    confirm({
-                      title: `Are you sure delete ${item.tenPhim} ?`,
-                      icon: <ExclamationCircleFilled />,
-                      // content: 'Some descriptions',
-                      okText: "Yes",
-                      okType: "danger",
-                      cancelText: "No",
-                      onOk() {
-                        dispatch(deleteMovie(item.maPhim));
-                        dispatch(
-                          fetchMovieList(searchParam.get("page"), idGroup, 10)
-                        );
-                      },
-                      onCancel() {
-                        // console.log("Cancel");
-                      },
-                    });
-                  }}
-                >
-                  <DeleteOutlined></DeleteOutlined>
-                </Button>
+                        <CalendarOutlined
+                          onClick={() => {
+                            navigate("/admin/showtime/" + item.maPhim);
+                          }}
+                          className="text-green-600 text-xl"
+                        />
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <Pagination
+            className="text-center my-4"
+            current={
+              searchParam.get("page") === null ? 1 : searchParam.get("page") * 1
+            }
+            pageSize={10}
+            total={movies?.totalCount}
+            onChange={(page) => {
+              setSearchParam({ page });
+            }}
+          />
+        </>
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Namefilm</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {keySearch?.map((item) => {
+              return (
+                <tr key={item.maPhim}>
+                  <td>{item.maPhim}</td>
+                  <td>
+                    <img
+                      style={{
+                        height: "150px",
+                        width: "100px",
+                        objectFit: "cover",
+                      }}
+                      src={item.hinhAnh}
+                    ></img>
+                  </td>
+                  <td>{item.tenPhim}</td>
+                  <td>{item.moTa}</td>
+                  <td>
+                    <span>
+                      <EditOutlined
+                        onClick={() => {
+                          navigate("/admin/film/edit/" + item.maPhim);
+                        }}
+                        className="text-2xl"
+                      />
 
-                <CalendarOutlined
-                  onClick={() => {
-                    navigate("/admin/showtime/" + item.maPhim);
-                  }}
-                  className="text-green-600 text-xl"
-                />
-              </span>
-            ),
-          };
-        })}
-      />
-        <Pagination
-        className="text-center my-4"
-        current={
-          searchParam.get("page") === null ? 1 : searchParam.get("page") * 1
-        }
-        pageSize={10}
-        total={movies?.totalCount}
-        onChange={(page) => {
-          setSearchParam({ page });
-        }}
-      />
-        </>: <Table
-        columns={columns}
-        pagination={false}
-        dataSource={keySearch?.map((item) => {
-          return {
-            key: item.maPhim,
-            idFilm: item.maPhim,
-            img: (
-              <img
-                style={{ height: "150px", width: "100px", objectFit: "cover" }}
-                src={item.hinhAnh}
-              ></img>
-            ),
-            name: item.tenPhim,
-            desc: item.moTa,
+                      <Button
+                        className="bg-red-600 text-white"
+                        onClick={() => {
+                          confirm({
+                            title: `Are you sure delete ${item.tenPhim} ?`,
+                            icon: <ExclamationCircleFilled />,
+                            // content: 'Some descriptions',
+                            okText: "Yes",
+                            okType: "danger",
+                            cancelText: "No",
+                            onOk() {
+                              dispatch(deleteMovie(item.maPhim));
+                              dispatch(
+                                fetchMovieList(
+                                  searchParam.get("page"),
+                                  idGroup,
+                                  10
+                                )
+                              );
+                            },
+                            onCancel() {
+                              // console.log("Cancel");
+                            },
+                          });
+                        }}
+                      >
+                        <DeleteOutlined></DeleteOutlined>
+                      </Button>
 
-            action: (
-              <span>
-                <EditOutlined
-                  onClick={() => {
-                    navigate("/admin/film/edit/" + item.maPhim);
-                  }}
-                  className="text-2xl"
-                />
+                      <CalendarOutlined
+                        onClick={() => {
+                          navigate("/admin/showtime/" + item.maPhim);
+                        }}
+                        className="text-green-600 text-xl"
+                      />
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
 
-                <Button
-                  className="bg-red-600 text-white"
-                  onClick={() => {
-                    confirm({
-                      title: `Are you sure delete ${item.tenPhim} ?`,
-                      icon: <ExclamationCircleFilled />,
-                      // content: 'Some descriptions',
-                      okText: "Yes",
-                      okType: "danger",
-                      cancelText: "No",
-                      onOk() {
-                        dispatch(deleteMovie(item.maPhim));
-                        dispatch(
-                          fetchMovieList(searchParam.get("page"), idGroup, 10)
-                        );
-                      },
-                      onCancel() {
-                        // console.log("Cancel");
-                      },
-                    });
-                  }}
-                >
-                  <DeleteOutlined></DeleteOutlined>
-                </Button>
-
-                <CalendarOutlined
-                  onClick={() => {
-                    navigate("/admin/showtime/" + item.maPhim);
-                  }}
-                  className="text-green-600 text-xl"
-                />
-              </span>
-            ),
-          };
-        })}
-      />}
       
-      
-      {/* <Table
-        columns={columns}
-        pagination={false}
-        dataSource={movies?.items?.map((item) => {
-          return {
-            key: item.maPhim,
-            idFilm: item.maPhim,
-            img: (
-              <img
-                style={{ height: "150px", width: "100px", objectFit: "cover" }}
-                src={item.hinhAnh}
-              ></img>
-            ),
-            name: item.tenPhim,
-            desc: item.moTa,
-
-            action: (
-              <span>
-                <EditOutlined
-                  onClick={() => {
-                    navigate("/admin/film/edit/" + item.maPhim);
-                  }}
-                  className="text-2xl"
-                />
-
-                <Button
-                  className="bg-red-600 text-white"
-                  onClick={() => {
-                    confirm({
-                      title: `Are you sure delete ${item.tenPhim} ?`,
-                      icon: <ExclamationCircleFilled />,
-                      // content: 'Some descriptions',
-                      okText: "Yes",
-                      okType: "danger",
-                      cancelText: "No",
-                      onOk() {
-                        dispatch(deleteMovie(item.maPhim));
-                        dispatch(
-                          fetchMovieList(searchParam.get("page"), idGroup, 10)
-                        );
-                      },
-                      onCancel() {
-                        console.log("Cancel");
-                      },
-                    });
-                  }}
-                >
-                  <DeleteOutlined></DeleteOutlined>
-                </Button>
-
-                <CalendarOutlined
-                  onClick={() => {
-                    navigate("/admin/showtime/" + item.maPhim);
-                  }}
-                  className="text-green-600 text-xl"
-                />
-              </span>
-            ),
-          };
-        })}
-      />
-      <Pagination
-        className="text-center my-4"
-        current={
-          searchParam.get("page") === null ? 1 : searchParam.get("page") * 1
-        }
-        pageSize={10}
-        total={movies?.totalCount}
-        onChange={(page) => {
-          setSearchParam({ page });
-        }}
-      /> */}
     </LayoutAdmin>
   );
 };

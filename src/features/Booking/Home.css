@@ -11,3 +11,31 @@
     align-items: center;
     background-attachment: fixed;
 }
+.contentCarousel{
+    height: 700px;
+    color: #fff;
+    line-height: 160px;
+    text-align: center;
+    background: #364d79;
+}
+@media screen and (max-width: 1190px){
+    .contentCarousel{
+        height: 400px;
+    }
+}
+@media screen and (max-width: 992px){
+    .contentCarousel{
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .contentCarousel{
+        height: 250px;
+    }
+}
+@media screen and (max-width: 576px){
+    .contentCarousel{
+        height: 250px;
+    }
+}
