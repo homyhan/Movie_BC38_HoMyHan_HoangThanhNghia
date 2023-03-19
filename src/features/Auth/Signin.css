@@ -40,3 +40,9 @@
     margin-top: 10px;
     font-weight: bold;
 }
+
+@media screen and (max-width: 768px){
+    .contentSignin .formSignin input{
+        width: 100%;
+    }
+}

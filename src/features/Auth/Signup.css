@@ -44,3 +44,12 @@
     margin-top: 10px;
     font-weight: bold;
 }
+
+@media screen and (max-width: 768px){
+    .contentSignup .formSignup input{
+        width: 100%;
+    }
+    .contentSignup .formSignup form{
+        width: auto;
+    }
+}
