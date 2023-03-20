@@ -1,3 +1,54 @@
 .titleMovieTab{
     font-family: 'Kaushan Script', cursive;
 }
+.col-child-3{
+    height: 550px;
+    overflow-y: scroll;
+}
+.tabscreensmall{
+    display: none;
+}
+.nameTheater h1{
+    font-size: 18px;
+}
+.bigcumrap{
+    width: 356px;
+}
+
+@media screen and (max-width: 992px){
+    
+    .tabscreenbig{
+        display: none;
+    }
+    .tabscreensmall{
+        display: block;
+    }
+    .col-child-3{
+        height: 370px;
+    }
+    .adressCumRap{
+        display: none;
+    }
+    .nameTheater{
+        border-bottom: 3px dashed white;
+    }
+    .nameTheater p{
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 768px){
+   
+}
+@media screen and (max-width: 576px){
+   
+    .nameTheater h1{
+        font-size: 13px;
+    }
+    /* .movieTab{
+        transform: scale(0.5);
+    } */
+    .bigcumrap{
+        width: 200px;
+    }
+}

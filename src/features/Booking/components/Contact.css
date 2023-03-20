@@ -46,3 +46,12 @@
     color: white;
     cursor: pointer;
 }
+
+@media screen and (max-width: 576px){
+    .contact input, .contact textarea{
+        width: 100%;
+    }
+    .contact .button input{
+        width: 100%;
+    }
+}
