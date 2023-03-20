@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .titleMovieList{
     font-family: 'Kaushan Script', cursive;
     font-size: 60px;

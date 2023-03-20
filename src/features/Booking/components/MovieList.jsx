@@ -17,7 +17,9 @@ const MovieList = () => {
       <h1 className="text-center font-bold text-white titleMovieList">
         MovieList
       </h1>
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 pl-4 pr-4
+       sm:grid-cols-2 sm:gap-6
+       md:grid-cols-4 md:gap-6">
         {movieList.items?.map((item) => {
           return <MovieItem key={item.maPhim} item={item}></MovieItem>;
         })}

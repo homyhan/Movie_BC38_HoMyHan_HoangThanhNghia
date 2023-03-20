@@ -6,7 +6,7 @@ const Footer = () => {
   const {movies} = useSelector(state=>state.booking)
   return (
     <div className="container mx-auto">
-      <div className="footer_content">
+      <div className="footer_content ml-2">
         <div className="">
           <h1>CyberMovie</h1>
           <li><a href="">About</a></li>

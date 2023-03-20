@@ -11,25 +11,45 @@ const Contact = () => {
             <div className="user_details">
               <div className="input_pox">
                 <span className="contact_datails">Full Name</span>
-                <input type="text" placeholder="enter your name" required />
+                <input className="max-w-xs
+                sm:max-w-sm
+                md:max-w-md
+                lg:max-w-lg
+                xl:max-w-xl" type="text" placeholder="enter your name" required />
               </div>
 
               <div className="input_pox">
                 <span className="contact_datails">Email</span>
-                <input type="text" placeholder="enter your Email" required />
+                <input className="max-w-xs
+                sm:max-w-sm
+                md:max-w-md
+                lg:max-w-lg
+                xl:max-w-xl" type="text" placeholder="enter your Email" required />
               </div>
               <div className="input_pox">
                 <span className="contact_datails">Phone Number</span>
-                <input type="text" placeholder="enter your Phone" required />
+                <input className="max-w-xs
+                sm:max-w-sm
+                md:max-w-md
+                lg:max-w-lg
+                xl:max-w-xl" type="text" placeholder="enter your Phone" required />
               </div>
               <div className="input_pox">
                 <span className="contact_datails">Content</span>
-                <textarea rows={4} placeholder="enter your content" required />
+                <textarea className="max-w-xs
+                sm:max-w-sm
+                md:max-w-md
+                lg:max-w-lg
+                xl:max-w-xl" rows={4} placeholder="enter your content" required />
               </div>
             </div>
 
             <div className="button">
-              <input type="submit" />
+              <input className="max-w-xs
+                sm:max-w-sm
+                md:max-w-md
+                lg:max-w-lg
+                xl:max-w-xl" type="submit" />
             </div>
           </form>
         </div>

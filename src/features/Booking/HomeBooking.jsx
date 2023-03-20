@@ -31,7 +31,11 @@ const HomeBooking = () => {
   }, [searchParam.get("page")]);
   return (
     <div>
-      <div style={{ position: "fixed", width: "100%", zIndex: "100" }}>
+      <div className="
+      sm:max-w-full
+      md:max-w-full
+      lg:max-w-full
+      xl:max-w-full" style={{ position: "fixed", width: "100%", zIndex: "100" }}>
         <Header></Header>
       </div>
       
