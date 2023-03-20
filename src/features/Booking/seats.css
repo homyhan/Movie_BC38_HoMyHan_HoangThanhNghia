@@ -98,6 +98,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
+    height: 100%;
 }
 @media screen and (max-width: 1000px){
     .seats_content{

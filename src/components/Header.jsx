@@ -13,7 +13,7 @@ const Header = () => {
     <div className="bg-black py-4">
       <div className="container flex mx-auto justify-between items-center content-header">
         <div>
-          <NavLink className="text-white headermovie mr-4" to="/">
+          <NavLink className="headermovie mr-4" to="/">
             CyberMovie
           </NavLink>
           {userLogin?.maLoaiNguoiDung === 'QuanTri'?<NavLink className="text-white linkToAdmin" to="/admin">Admin</NavLink>:null}
@@ -22,7 +22,7 @@ const Header = () => {
 
         <nav>
           {userLogin ? (
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", alignItems:'center' }}>
               <p className="text-white mr-2 nameuser">Hello {userLogin.hoTen}</p>
               <UserOutlined
                 style={{

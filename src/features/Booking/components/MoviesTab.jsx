@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Button, Tabs } from "antd";
+import {RightCircleOutlined} from "@ant-design/icons";
 
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import './MovieTab.css';
+import "./MovieTab.css";
 import { movieServ } from "../../../services/movieServices";
 
 const MoviesTab = () => {
-  const userLogin = useSelector(state=>state.auth.user);
+  const userLogin = useSelector((state) => state.auth.user);
   const [dataMovie, setDataMovie] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     try {
       async function fetchScheduleByTheater() {
         let res = await movieServ.getScheduleByTheater();
-        console.log("res",res);
+        console.log("res", res);
         setDataMovie(res.data.content);
       }
       fetchScheduleByTheater();
@@ -28,14 +29,14 @@ const MoviesTab = () => {
     navigate("/seats/" + id);
   }
 
-  // CHECK SIGNIN 
-  const checkLogin = (id)=>{
-    if(userLogin){
+  // CHECK SIGNIN
+  const checkLogin = (id) => {
+    if (userLogin) {
       goToBooking(id);
-    }else{
+    } else {
       navigate("/signin");
     }
-  }
+  };
 
   let renderHeThongRap = () => {
     return dataMovie.map((heThongRap) => {
@@ -53,91 +54,190 @@ const MoviesTab = () => {
         ),
         key: heThongRap.maHeThongRap,
         children: (
-          <Tabs
-            defaultActiveKey="0"
-            tabPosition={"left"}
-            style={{
-              height: 550,
-            }}
-            items={heThongRap.lstCumRap.map((cumRap) => {
-              return {
-                key: cumRap.maCumRap,
-                label: (
-                  <div style={{ width: "356px" }} className="text-left text-white">
-                    <h1 className="text-xl">{cumRap.tenCumRap}</h1>
-                    <p className="w-full">{cumRap.diaChi}</p>
-                  </div>
-                ),
-                children: (
-                  <div
-                    style={{
-                      height: 550,
-                      overflowY: "scroll",
-                    }}
-                  >
-                    {cumRap.danhSachPhim.map((item) => {
-                      return (
-                        <div className="flex my-2" key={item.maPhim}>
-                          <img
-                            style={{
-                              height: "150px",
-                              width: "100px",
-                              objectFit: "cover",
-                              marginRight: "10px",
-                            }}
-                            src={item.hinhAnh}
-                          ></img>
-                          <div>
-                            <p className="text-white">
-                              <b>{item.tenPhim}</b>
-                            </p>
+          <>
+            <Tabs
+            className="tabscreenbig"
+              defaultActiveKey="0"
+              tabPosition={"left"}
+              style={{
+                height: 550,
+              }}
+              items={heThongRap.lstCumRap.map((cumRap) => {
+                return {
+                  key: cumRap.maCumRap,
+                  label: (
+                    <div
+                      style={{ width: "356px" }}
+                      className="text-left text-white"
+                    >
+                      <h1 className="text-xl">{cumRap.tenCumRap}</h1>
+                      <p className="w-full">{cumRap.diaChi}</p>
+                    </div>
+                  ),
+                  children: (
+                    <div
+                      style={{
+                        height: 550,
+                        overflowY: "scroll",
+                      }}
+                    >
+                      {cumRap.danhSachPhim.map((item) => {
+                        return (
+                          <div className="flex my-2" key={item.maPhim}>
+                            <img
+                              style={{
+                                height: "150px",
+                                width: "100px",
+                                objectFit: "cover",
+                                marginRight: "10px",
+                              }}
+                              src={item.hinhAnh}
+                            ></img>
                             <div>
-                              {item.lstLichChieuTheoPhim.map((itemTime) => {
-                                return (
-                                  <Button
-                                    onClick={() =>
-                                      checkLogin(itemTime.maLichChieu)
-                                    }
-                                    className="bg-stone-20 m-1 btnTime font-bold"
-                                    key={itemTime.maPhim}
-                                  >
-                                    <p className="text-lime-600">
-                                      {moment(
-                                        itemTime.ngayChieuGioChieu
-                                      ).format("DD-MM-yyyy")}{" "}
-                                      <span className="font-bold text-2xl text-black">
-                                        ~
-                                      </span>{" "}
-                                      <span className="text-red-600 ">
+                              <p className="text-white">
+                                <b>{item.tenPhim}</b>
+                              </p>
+                              <div>
+                                {item.lstLichChieuTheoPhim.map((itemTime) => {
+                                  return (
+                                    <Button
+                                      onClick={() =>
+                                        checkLogin(itemTime.maLichChieu)
+                                      }
+                                      className="bg-stone-20 m-1 btnTime font-bold"
+                                      key={itemTime.maPhim}
+                                    >
+                                      <p className="text-lime-600">
                                         {moment(
                                           itemTime.ngayChieuGioChieu
-                                        ).format("hh:mm")}
-                                      </span>{" "}
-                                    </p>
-                                  </Button>
-                                );
-                              })}
+                                        ).format("DD-MM-yyyy")}{" "}
+                                        <span className="font-bold text-2xl text-black">
+                                          ~
+                                        </span>{" "}
+                                        <span className="text-red-600 ">
+                                          {moment(
+                                            itemTime.ngayChieuGioChieu
+                                          ).format("hh:mm")}
+                                        </span>{" "}
+                                      </p>
+                                    </Button>
+                                  );
+                                })}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ),
-              };
-            })}
-          ></Tabs>
+                        );
+                      })}
+                    </div>
+                  ),
+                };
+              })}
+            ></Tabs>
+            <Tabs
+            className="tabscreensmall"
+              defaultActiveKey="0"
+              tabPosition={"top"}
+              style={{
+                height: 550,
+              }}
+              items={heThongRap.lstCumRap.map((cumRap) => {
+                return {
+                  key: cumRap.maCumRap,
+                  label: (
+                    <div
+                      // style={{ width: "300px" }}
+                      className="text-left text-white bigcumrap"
+                    >
+                      <div className="flex justify-between items-center nameTheater">
+                        <h1>{cumRap.tenCumRap}</h1>
+                        <p> <RightCircleOutlined /></p>
+                      </div>
+                      
+                      <p className="w-full adressCumRap">{cumRap.diaChi}</p>
+                    </div>
+                  ),
+                  children: (
+                    <div
+                    className="col-child-3"
+                     
+                    >
+                      {cumRap.danhSachPhim.map((item) => {
+                        return (
+                          <div className="flex my-2" key={item.maPhim}>
+                            <img
+                              style={{
+                                height: "150px",
+                                width: "100px",
+                                objectFit: "cover",
+                                marginRight: "10px",
+                              }}
+                              src={item.hinhAnh}
+                            ></img>
+                            <div>
+                              <p className="text-white">
+                                <b>{item.tenPhim}</b>
+                              </p>
+                              <div>
+                                {item.lstLichChieuTheoPhim.map((itemTime) => {
+                                  return (
+                                    <Button
+                                      onClick={() =>
+                                        checkLogin(itemTime.maLichChieu)
+                                      }
+                                      className="bg-stone-20 m-1 btnTime font-bold"
+                                      key={itemTime.maPhim}
+                                    >
+                                      <p className="text-lime-600">
+                                        {moment(
+                                          itemTime.ngayChieuGioChieu
+                                        ).format("DD-MM-yyyy")}{" "}
+                                        <span className="font-bold text-2xl text-black">
+                                          ~
+                                        </span>{" "}
+                                        <span className="text-red-600 ">
+                                          {moment(
+                                            itemTime.ngayChieuGioChieu
+                                          ).format("hh:mm")}
+                                        </span>{" "}
+                                      </p>
+                                    </Button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ),
+                };
+              })}
+            ></Tabs>
+          </>
         ),
       };
     });
   };
   return (
     <div className="container mx-auto">
-      <h1 className="mb-5 pt-5 text-center text-white titleMovieTab">Theater Cluster</h1>
+      <h1 className="mb-5 pt-5 text-center text-white titleMovieTab">
+        Theater Cluster
+      </h1>
       <div style={{ border: "1px solid gray", padding: "20px 25px" }}>
         <Tabs
+          className="tabscreenbig"
           defaultActiveKey="0"
           tabPosition={"left"}
+          style={{
+            height: 550,
+            margin: "0px",
+          }}
+          items={renderHeThongRap()}
+        />
+        <Tabs
+          className="tabscreensmall"
+          defaultActiveKey="0"
+          tabPosition={"top"}
           style={{
             height: 550,
             margin: "0px",
