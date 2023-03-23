@@ -34,16 +34,7 @@ export const movieServ = {
                 }
             })
     },
-    datVe: (thongTinDatVe)=>{
-        // thongTinDatVe={
-        //     "maLichChieu": 0,
-        //     "danhSachVe": [
-        //       {
-        //         "maGhe": 0,
-        //         "giaVe": 0
-        //       }
-        //     ]
-        //   }
+    datVe: (thongTinDatVe)=>{        
         return https.post("/QuanLyDatVe/DatVe", thongTinDatVe)
     },
 }

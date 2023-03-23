@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "./thunk";
-import { HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined, LeftCircleOutlined } from "@ant-design/icons";
+import { createBrowserHistory } from "history";
 import "./Signin.css";
+let history = createBrowserHistory();
 
 const Signin = () => {
   const [loginInfo, setLoginInfo] = useState({ taiKhoan: "", matKhau: "" });
@@ -16,14 +18,6 @@ const Signin = () => {
     const { name, value } = evt.target;
     setLoginInfo({ ...loginInfo, [name]: value });
   };
-  // const checkAdmin = ()=>{
-  //   const localUserLogin = JSON.parse(localStorage.getItem("USER_LOGIN"));
-  //   if(user?.maLoaiNguoiDung!=='KhachHang'){
-  //    return navigate('/admin');
-  //   }else{
-  //     return navigate('/');
-  //   }
-  // }
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     console.log(loginInfo);
@@ -36,8 +30,7 @@ const Signin = () => {
       return alert("Vui long nhap day du thong tin");
     } else {
       await dispatch(login(loginInfo));
-      // checkAdmin();
-      if (user?.maLoaiNguoiDung === "QuanTri") {
+      if (user?.maLoaiNguoiDung === "GV") {
         return navigate("/admin");
       } else {
         return navigate("/");
@@ -47,22 +40,25 @@ const Signin = () => {
 
   return (
     <div className="pageSignin">
-      <HomeOutlined className="text-white text-2xl ml-3 mt-3
-      " onClick={()=>navigate("/")}/>
+      <HomeOutlined
+        className="text-white text-2xl ml-3 mt-3
+      "
+        onClick={() => navigate("/")}
+      />
       <div className="contentSignin">
-        <div className="mx-auto formSignin
+        <div
+          className="mx-auto formSignin
         max-w-sm text-center
         sm:max-w-md
-        
-        ">
-          <form 
-          className="max-w-10 max-h-30
+        "
+        >
+          <form
+            className="max-w-10 max-h-30
           "
-          onSubmit={handleSubmit}>
-            <div 
-            className="">
-              <div
-              className="">
+            onSubmit={handleSubmit}
+          >
+            <div className="">
+              <div className="">
                 <label className="block max-w-xs">Username</label>
                 <input
                   onChange={handleChange}
@@ -87,8 +83,11 @@ const Signin = () => {
               <div className="text-center">
                 <Button htmlType="submit" className="btnSigin">
                   Signin
-                </Button> <br></br>
-                <NavLink className="linktoSignup" to="/signup">Signup?</NavLink>
+                </Button>{" "}
+                <br></br>
+                <NavLink className="linktoSignup" to="/signup">
+                  Signup?
+                </NavLink>
               </div>
             </div>
           </form>

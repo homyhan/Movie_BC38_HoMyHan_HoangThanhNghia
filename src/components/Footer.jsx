@@ -1,9 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import "./Footer.css";
 
 const Footer = () => {
-  const {movies} = useSelector(state=>state.booking)
   return (
     <div className="container mx-auto">
       <div className="footer_content ml-2">

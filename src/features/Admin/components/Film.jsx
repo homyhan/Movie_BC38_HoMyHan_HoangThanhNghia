@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { AudioOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table, Modal, Pagination } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Button, Input, Space, Modal, Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteMovie, fetchMovieList, fetchMovieListFull } from "../thunk";
-import {
-  Navigate,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import LayoutAdmin from "../../../HOCs/LayoutAdmin";
 import { ExclamationCircleFilled, CalendarOutlined } from "@ant-design/icons";
-import HomeAdmin from "../HomeAdmin";
 import "./Film.css";
-// import { Button, Modal, Space } from 'antd';
 const { confirm } = Modal;
 const { Search } = Input;
 
@@ -31,7 +24,6 @@ const Film = () => {
   const moveToAddnew = () => {
     navigate("/admin/film/addnew");
   };
-  // console.log(searchParam.get("page"));
   useEffect(() => {
     dispatch(fetchMovieList(searchParam.get("page"), idGroup, 10));
   }, [dispatch, searchParam.get("page"), 10, searchTerm]);
@@ -39,9 +31,6 @@ const Film = () => {
   if (!idGroup) {
     return <Navigate to="/signin"></Navigate>;
   }
-  const onSearch = (value) => {
-    // console.log(value);
-  };
   const handleInputChange = (evt) => {
     const value = evt.target.value;
     dispatch({
@@ -55,25 +44,24 @@ const Film = () => {
     <LayoutAdmin>
       <div className="top2btn">
         <div className="main2btn">
-        <Button
-          className="w-full mb-2 rounded-none"
-          onClick={() => {
-            redirect("admin");
-          }}
-        >
-          Movie Manager
-        </Button>
-        
-        <Button
-          onClick={() => {
-            redirect("admin/user");
-          }}
-          className="w-full rounded-none mb-2"
-        >
-          User Manager
-        </Button>
+          <Button
+            className="w-full mb-2 rounded-none"
+            onClick={() => {
+              redirect("admin");
+            }}
+          >
+            Movie Manager
+          </Button>
+
+          <Button
+            onClick={() => {
+              redirect("admin/user");
+            }}
+            className="w-full rounded-none mb-2"
+          >
+            User Manager
+          </Button>
         </div>
-        
       </div>
       <div className="text-right mb-4">
         <h2 className="text-left px-3">Movie Manager</h2>
@@ -88,7 +76,6 @@ const Film = () => {
         <Space className="w-2/5" direction="vertical">
           <Search
             placeholder="Search by film name"
-            onSearch={onSearch}
             enterButton
             value={searchTerm}
             onChange={handleInputChange}
@@ -139,7 +126,6 @@ const Film = () => {
                             confirm({
                               title: `Are you sure delete ${item.tenPhim} ?`,
                               icon: <ExclamationCircleFilled />,
-                              // content: 'Some descriptions',
                               okText: "Yes",
                               okType: "danger",
                               cancelText: "No",
@@ -152,9 +138,6 @@ const Film = () => {
                                     10
                                   )
                                 );
-                              },
-                              onCancel() {
-                                // console.log("Cancel");
                               },
                             });
                           }}
@@ -230,7 +213,6 @@ const Film = () => {
                           confirm({
                             title: `Are you sure delete ${item.tenPhim} ?`,
                             icon: <ExclamationCircleFilled />,
-                            // content: 'Some descriptions',
                             okText: "Yes",
                             okType: "danger",
                             cancelText: "No",
@@ -243,9 +225,6 @@ const Film = () => {
                                   10
                                 )
                               );
-                            },
-                            onCancel() {
-                              // console.log("Cancel");
                             },
                           });
                         }}
@@ -267,8 +246,6 @@ const Film = () => {
           </tbody>
         </table>
       )}
-
-      
     </LayoutAdmin>
   );
 };

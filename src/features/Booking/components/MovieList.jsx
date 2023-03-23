@@ -2,14 +2,11 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MovieItem from "./MovieItem";
 import { Pagination } from "antd";
-import { fetchMovieList } from "../thunk";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import "./MovieList.css";
 
 const MovieList = () => {
   const movieList = useSelector((state) => state.booking.movies);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [searchParam, setSearchParam] = useSearchParams();
 
   return (

@@ -11,7 +11,6 @@ const MovieItem = (props) => {
   const navigate = useNavigate();
   const { trailer } = useSelector((state) => state.booking);
   const newTrailer = trailer?.replace("watch?v=", "embed/");
-  // console.log(newTrailer);
   return (
     <Card
       hoverable
@@ -21,12 +20,10 @@ const MovieItem = (props) => {
         border: "1px solid #3c3c3c",
       }}
       headStyle={{ backgroundColor: "rgba(255, 255, 255, 0.4)", border: 0 }}
-      // bodyStyle={{backgroundColor: 'rgba(255, 0, 0, 0.4)', border: 0 }}
       cover={
         <div className="w-full mvItem">
           <img
             className="w-full imgMovieItem"
-            // style={{ height: "250px", objectFit: "cover" }}
             alt="example"
             src={props.item.hinhAnh}
           />
@@ -66,7 +63,6 @@ const MovieItem = (props) => {
         title="Trailer"
         centered
         open={open}
-        // onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
         footer={null}
         width={800}

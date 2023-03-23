@@ -104,6 +104,7 @@
     .seats_content{
         display: block !important;
     }
+    
 }
 @media screen and (max-width: 768px){
     .chair{
@@ -115,8 +116,7 @@
     }
 }
 @media screen and (max-width: 576px){
-    .chair{
-        /* padding: 10px; */
+    .chair{        
         height: 20px;
         width: 20px;
         margin: 3px;

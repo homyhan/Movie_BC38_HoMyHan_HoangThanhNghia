@@ -15,14 +15,13 @@ import moment from 'moment';
 import LayoutAdmin from "../../../HOCs/LayoutAdmin";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { addMoive, fetchMovieItem, updateMovie } from "../thunk";
+import { fetchMovieItem, updateMovie } from "../thunk";
 import { useNavigate, useParams } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import './User.css';
 let history = createBrowserHistory();
 
 const { TextArea } = Input;
-const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
 
 const EditFilm = () => {
   const [imgSrc, setImgSrc] = useState("");
@@ -46,7 +45,6 @@ const EditFilm = () => {
       tenPhim: selectedFilm?.tenPhim,
       trailer: selectedFilm?.trailer,
       moTa: selectedFilm?.moTa,
-      // ngayKhoiChieu: selectedFilm?.ngayKhoiChieu,
       ngayKhoiChieu: moment(selectedFilm?.ngayKhoiChieu).format('DD/MM/YYYY'),
       dangChieu: selectedFilm?.dangChieu,
       sapChieu: selectedFilm?.sapChieu,
@@ -62,22 +60,10 @@ const EditFilm = () => {
         'Enter correct url!'
     ),
       moTa: Yup.string().trim().required("Required"),
-      // ngayKhoiChieu: Yup.date().required("Required").min(new Date(), 'Ngày khởi chiếu phải lớn hơn ngày hiện tại'),
       danhGia: Yup.number()
         .required("Required")
         .min(0, "Số sao phải lớn hơn hoặc bằng 0")
         .max(10, "Số sao phải nhỏ hơn hoặc bằng 10"),
-      // ngayKhoiChieu: Yup.date().required("Required"),
-      // ngayKhoiChieu: Yup.string().required('Vui lòng chọn ngày'),
-
-      // hinhAnh: Yup.string()
-      //   // .required("Required")
-      //   // .test("FILE_SIZE", "Too big", value=>value && value<1024)
-      //   .test(
-      //     "FILE_TYPE",
-      //     "Invalid",
-      //     (value) => value && ["image/png", "image/jpeg", "image/jpg"].includes(value.type)
-      //   ),
     }),
     validateOnBlur: true,
     validateOnChange: true,
@@ -96,7 +82,7 @@ const EditFilm = () => {
       }
 
       await dispatch(updateMovie(formData));
-      // success();
+      
       history.back();
     },
   });
@@ -136,20 +122,11 @@ const EditFilm = () => {
       };
       return formik.setFieldValue("hinhAnh", file);
     }
-
-    // console.log("file", file);
   };
-
-  const [messageApi, contextHolder] = message.useMessage();
-  const success = () => {
-    messageApi.open({
-      type: "success",
-      content: "This is a success message",
-    });
-  };
+  
   return (
     <LayoutAdmin>
-      {contextHolder}
+      
       <div className="top2btn">
         <div className="main2btn">
         <Button
@@ -234,12 +211,7 @@ const EditFilm = () => {
             onChange={handleChangeDatePicker}
             value={dayjs(formik.values.ngayKhoiChieu, 'DD/MM/YYYY')}
           />
-          {/* {formik.touched.ngayKhoiChieu && formik.errors.ngayKhoiChieu ? (
-            <p className="text-red-600 font-bold">{formik.errors.ngayKhoiChieu}</p>
-          ) : null} */}
-          {/* {console.log("log bottom", (dayjs(moment(formik.values.ngayKhoiChieu).format('DD/MM/YYYY'), 'DD/MM/YYYY').format('DD/MM/YYYY')))} */}
-
-          {/* <DatePicker format="DD/MM/YYYY" onChange={handleChangeDatePicker}/> */}
+         
         </Form.Item>
 
         <Form.Item label="Now showing">

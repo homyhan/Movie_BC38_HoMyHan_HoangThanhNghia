@@ -1,12 +1,10 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { bookingTicket, fetchScheduleDetail } from "./thunk";
-import { Button, message } from "antd";
+import { message } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-// import style  from './seats.module.css';
 import "./seats.css";
-// import { movieServ } from "../../services/movieService";
 
 const Seats = () => {
   <h1>abc</h1>;
@@ -32,7 +30,7 @@ const Seats = () => {
         duration: 2.5,
       })
       .then(() => message.success("Success", 2.5));
-    // .then(() => message.info('Loading finished', 2.5));
+    
   };
   return (
     <div className=" seats_content">
@@ -75,11 +73,11 @@ const Seats = () => {
                 </button>
 
                 {(index + 1) % 16 ===0 ? <br></br> : ""}
-                {/* {isLoading ? <span class="loader"></span>: null} */}
+                
               </Fragment>
             );
 
-            // <button key={item.maGhe} className='m-2 p-2'>{item.tenGhe}</button>
+            
           })}
         </div>
 
@@ -104,7 +102,7 @@ const Seats = () => {
           </table>
         </div>
       </div>
-      <div className="col-span-2 mr-5">
+      <div className="col-span-2 pr-5 infoSeats">
         <div>
           <h1 className="seats_price text-center">
             {dsGheDangDat
@@ -146,7 +144,7 @@ const Seats = () => {
               thongTinDatVe.danhSachVe = dsGheDangDat;
               console.log(thongTinDatVe);
               if (dsGheDangDat?.length === 0) {
-                // dispatch(bookingTicket(thongTinDatVe));
+                
                 alert("chua dat ve");
               } else {
                 dispatch({
@@ -162,7 +160,7 @@ const Seats = () => {
                   });
                 }, 500);
                 success();
-                // alert("da dat")
+                
               }
             }}
           >

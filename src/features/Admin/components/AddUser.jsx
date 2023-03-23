@@ -89,12 +89,10 @@ const AddUser = () => {
     console.log(values);
    return formik.setFieldValue("maLoaiNguoiDung", values);
   };
-
-  const [messageApi, contextHolder] = message.useMessage();
  
   return (
     <LayoutAdmin>
-      {contextHolder}
+      
       <div className="top2btn">
         <div className="main2btn">
         <Button

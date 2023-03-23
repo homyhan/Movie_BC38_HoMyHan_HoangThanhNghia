@@ -37,8 +37,7 @@ table {
       .table tr {
         margin-bottom: 15px;
       }
-      .table td {
-        /* padding-left: 50%; */
+      .table td {        
         text-align: left;
         position: relative;
       }

@@ -8,7 +8,6 @@ export const fetchMovieList =(soTrang, maNhom, soPhanTuTrenTrang)=> async (dispa
           type: "SET_MOVIES_ADMIN",
           payload: res.data.content,
         });
-        // console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +20,6 @@ export const fetchMovieList =(soTrang, maNhom, soPhanTuTrenTrang)=> async (dispa
           type: "SET_MOVIES_FULL_ADMIN",
           payload: res.data.content,
         });
-        // console.log(res.data.content);
     } catch (error) {
       console.log(error);
     }
@@ -47,8 +45,7 @@ export const updateMovie = (data)=>async (dispatch)=>{
 
 export const deleteMovie = (idFilm) =>async (dispatch)=>{
   try {
-    const res = await movieList.deleteMovie(idFilm);
-    // dispatch(fetchMovieList());
+    const res = await movieList.deleteMovie(idFilm);    
   } catch (error) {
     console.log(error);
   }
@@ -61,8 +58,7 @@ export function fetchMovieItem(id){
       dispatch({
         type: "SET_MOVIE_ITEM",
         payload: res.data.content
-      })
-    //  console.log(res.data.content);
+      })    
     } catch (error) {
       console.log(error);
     }
@@ -78,8 +74,7 @@ export const fetchUserList =(soTrang, maNhom)=> async (dispatch) => {
     dispatch({
         type: "SET_USER_LIST",
         payload: res.data.content,
-      });
-      // console.log(res.data.content);
+      });      
   } catch (error) {
     console.log(error);
   }
@@ -96,8 +91,7 @@ export const addUser = (data)=> async (dispatch)=>{
 
 export const deleteUser = (id) =>async (dispatch)=>{
   try {
-    const res = await movieList.deleteUser(id);
-    // dispatch(fetchMovieList());
+    const res = await movieList.deleteUser(id);    
   } catch (error) {
     console.log(error);
   }
@@ -110,8 +104,7 @@ export function fetchUserItem(id){
       dispatch({
         type: "SET_USER_ITEM",
         payload: res.data.content
-      })
-    //  console.log(res.data.content);
+      })    
     } catch (error) {
       console.log(error);
     }
@@ -120,8 +113,7 @@ export function fetchUserItem(id){
 
 export const updateUser = (data)=>async (dispatch)=>{
   try {
-    const res = await movieList.updateUserItem(data);
-    // console.log(res.data.content);
+    const res = await movieList.updateUserItem(data);    
   } catch (error) {
     console.log(error);
   }
@@ -134,8 +126,7 @@ export const fetchUserSearch =(tuKhoa)=> async (dispatch) => {
     dispatch({
         type: "SET_USER_LIST_SEARCH",
         payload: res.data.content,
-      });
-      // console.log(res.data.content);
+      });      
   } catch (error) {
     console.log(error);
   }

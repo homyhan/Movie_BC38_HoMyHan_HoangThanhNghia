@@ -16,10 +16,8 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import LayoutAdmin from "../../../HOCs/LayoutAdmin";
-import { ExclamationCircleFilled, CalendarOutlined } from "@ant-design/icons";
-import { movieList } from "../services/adminService";
+import { ExclamationCircleFilled } from "@ant-design/icons";
 import './User.css'
-// import { Button, Modal, Space } from 'antd';
 const { confirm } = Modal;
 const { Search } = Input;
 
@@ -30,8 +28,7 @@ const User = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const redirect = (page) => {
     navigate("/" + page);
-  };
-  const param = useParams();
+  };  
   const navigate = useNavigate();
   const [searchParam, setSearchParam] = useSearchParams();
   const { userList, userListSearch } = useSelector((state) => state.admin);
@@ -40,7 +37,6 @@ const User = () => {
   const handleInputChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value.toLowerCase());
-    // handleSearch(value);
   };
 
   useEffect(() => {
@@ -87,8 +83,7 @@ const User = () => {
         <br />
         <Space className="w-2/5" direction="vertical">
           <Search
-            placeholder="Search by fullname"
-            // onSearch={handleSearch}
+            placeholder="Search by fullname"            
             enterButton
             value={searchTerm}
             onChange={handleInputChange}
@@ -129,8 +124,7 @@ const User = () => {
                           onClick={() => {
                             confirm({
                               title: `Are you sure delete ${item.hoTen} ?`,
-                              icon: <ExclamationCircleFilled />,
-                              // content: 'Some descriptions',
+                              icon: <ExclamationCircleFilled />,                              
                               okText: "Yes",
                               okType: "danger",
                               cancelText: "No",
@@ -147,9 +141,7 @@ const User = () => {
                           }}
                         >
                           <DeleteOutlined></DeleteOutlined>
-                        </Button>
-
-                        {/* <CalendarOutlined className="text-green-600 text-xl"/> */}
+                        </Button>                        
                       </span>
                     </td>
                   </tr>
@@ -194,8 +186,7 @@ const User = () => {
                     onClick={() => {
                       confirm({
                         title: `Are you sure delete ${item.hoTen} ?`,
-                        icon: <ExclamationCircleFilled />,
-                        // content: 'Some descriptions',
+                        icon: <ExclamationCircleFilled />,                        
                         okText: "Yes",
                         okType: "danger",
                         cancelText: "No",

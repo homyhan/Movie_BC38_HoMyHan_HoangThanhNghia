@@ -6,17 +6,9 @@ import MovieList from "./components/MovieList";
 import { useSearchParams } from "react-router-dom";
 import MoviesTab from "./components/MoviesTab";
 import Header from "../../components/Header";
-import './Home.css';
+import "./Home.css";
 import Contact from "./components/Contact";
 import Footer from "../../components/Footer";
-
-// const contentStyle = {
-//   height: "700px",
-//   color: "#fff",
-//   lineHeight: "160px",
-//   textAlign: "center",
-//   background: "#364d79",
-// };
 
 const HomeBooking = () => {
   const dispatch = useDispatch();
@@ -31,39 +23,41 @@ const HomeBooking = () => {
   }, [searchParam.get("page")]);
   return (
     <div>
-      <div className="
+      <div
+        className="
       sm:max-w-full
       md:max-w-full
       lg:max-w-full
-      xl:max-w-full" style={{ position: "fixed", width: "100%", zIndex: "100" }}>
+      xl:max-w-full"
+        style={{ position: "fixed", width: "100%", zIndex: "100" }}
+      >
         <Header></Header>
       </div>
-      
-        <Carousel autoplay effect="fade">
-          {banners.map((item, index) => {
-            return (
-              <div key={item.maBanner}>
-                <h3 className="contentCarousel" >
-                  <img className="w-full" src={item.hinhAnh}></img>
-                </h3>
-              </div>
-            );
-          })}
-        </Carousel>
-      
+
+      <Carousel autoplay effect="fade">
+        {banners.map((item, index) => {
+          return (
+            <div key={item.maBanner}>
+              <h3 className="contentCarousel">
+                <img className="w-full" src={item.hinhAnh}></img>
+              </h3>
+            </div>
+          );
+        })}
+      </Carousel>
 
       <div className="movieList">
         <MovieList></MovieList>
       </div>
-        <div className="movieTab">
-          <MoviesTab></MoviesTab>
-        </div>
-        <div className="contactHome">
-          <Contact></Contact>
-        </div>
-          <div className="footer">
-            <Footer></Footer>
-          </div>
+      <div className="movieTab">
+        <MoviesTab></MoviesTab>
+      </div>
+      <div className="contactHome">
+        <Contact></Contact>
+      </div>
+      <div className="footer">
+        <Footer></Footer>
+      </div>
     </div>
   );
 };

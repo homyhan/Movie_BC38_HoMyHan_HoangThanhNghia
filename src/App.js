@@ -35,21 +35,6 @@ function App() {
     dispatch(fetchProfile);
   }, []);
   return (
-    // <BrowserRouter>
-    //   <Header></Header>
-    //   <Routes>
-
-    //     {routes.map(({ path, component: Component }, index) => {
-    //       return (
-    //         <Route key={index} path={path} element={<Component />}>
-
-    //         </Route>
-    //       );
-    //     })}
-
-    //   </Routes>
-    // </BrowserRouter>
-
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<RouteComponent Component={HomeBooking} />} />

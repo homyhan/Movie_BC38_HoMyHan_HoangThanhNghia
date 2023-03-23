@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Tabs } from "antd";
-import {RightCircleOutlined} from "@ant-design/icons";
+import { RightCircleOutlined } from "@ant-design/icons";
 
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +56,7 @@ const MoviesTab = () => {
         children: (
           <>
             <Tabs
-            className="tabscreenbig"
+              className="tabscreenbig"
               defaultActiveKey="0"
               tabPosition={"left"}
               style={{
@@ -134,7 +134,7 @@ const MoviesTab = () => {
               })}
             ></Tabs>
             <Tabs
-            className="tabscreensmall"
+              className="tabscreensmall"
               defaultActiveKey="0"
               tabPosition={"top"}
               style={{
@@ -150,17 +150,17 @@ const MoviesTab = () => {
                     >
                       <div className="flex justify-between items-center nameTheater">
                         <h1>{cumRap.tenCumRap}</h1>
-                        <p> <RightCircleOutlined /></p>
+                        <p>
+                          {" "}
+                          <RightCircleOutlined />
+                        </p>
                       </div>
-                      
+
                       <p className="w-full adressCumRap">{cumRap.diaChi}</p>
                     </div>
                   ),
                   children: (
-                    <div
-                    className="col-child-3"
-                     
-                    >
+                    <div className="col-child-3">
                       {cumRap.danhSachPhim.map((item) => {
                         return (
                           <div className="flex my-2" key={item.maPhim}>

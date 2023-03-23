@@ -47,7 +47,7 @@ const ShowTime = (props) => {
       } catch (error) {
         console.log(error);
       }
-      // console.log("values", values);
+      
     },
   });
 
@@ -55,7 +55,7 @@ const ShowTime = (props) => {
     heThongRapChieu: [],
     cumRapChieu: [],
   });
-  // console.log(state.heThongRapChieu);
+  
   useEffect(
     () => async () => {
       try {
@@ -71,15 +71,14 @@ const ShowTime = (props) => {
     []
   );
 
-  const handleChangeHeThongRap = async (value) => {
-    // console.log("mahethongrap", value);
+  const handleChangeHeThongRap = async (value) => {    
     try {
       const res = await movieList.getInfoCumRap(value);
       setState({
         ...state,
         cumRapChieu: res.data.content,
       });
-      // console.log(res.data.content);
+      
     } catch (error) {
       console.log(error);
     }
@@ -91,8 +90,7 @@ const ShowTime = (props) => {
     );
     
   };
-  const handleChangeCumRap = (values) => {
-    // console.log(values);
+  const handleChangeCumRap = (values) => {    
     formik.setFieldValue("maRap", values);
   };
   const onChangeDate = (values) => {
@@ -155,8 +153,7 @@ const ShowTime = (props) => {
             }))}
             onChange={handleChangeHeThongRap}
             placeholder="Theater system"
-          />
-          
+          />          
         </Form.Item>
 
         <Form.Item label="Theater cluster">
