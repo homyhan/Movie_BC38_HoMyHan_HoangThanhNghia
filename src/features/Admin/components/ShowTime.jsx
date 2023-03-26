@@ -55,21 +55,36 @@ const ShowTime = (props) => {
     heThongRapChieu: [],
     cumRapChieu: [],
   });
-  
-  useEffect(
-    () => async () => {
-      try {
-        const res = await movieList.getInfoHeThongRap();
-        setState({
+  const fetchData = () => {
+    movieList.getInfoHeThongRap()
+      .then(async (res) => {
+        await setState({
           ...state,
           heThongRapChieu: res.data.content,
         });
-      } catch (error) {
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    },
+      });
+  }
+  useEffect(
+    () => fetchData(),
     []
   );
+  // useEffect(
+  //   () => async () => {
+  //     try {
+  //       const res = await movieList.getInfoHeThongRap();
+  //       setState({
+  //         ...state,
+  //         heThongRapChieu: res.data.content,
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   },
+  //   []
+  // );
 
   const handleChangeHeThongRap = async (value) => {    
     try {
