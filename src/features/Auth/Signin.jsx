@@ -6,6 +6,8 @@ import { login } from "./thunk";
 import { HomeOutlined, LeftCircleOutlined } from "@ant-design/icons";
 import { createBrowserHistory } from "history";
 import "./Signin.css";
+import { AuthService } from "./services/AuthService";
+import Swal from 'sweetalert2'
 let history = createBrowserHistory();
 
 const Signin = () => {
@@ -20,22 +22,32 @@ const Signin = () => {
   };
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(loginInfo);
-    if (
-      loginInfo.taiKhoan === "" ||
-      loginInfo.matKhau === "" ||
-      loginInfo.taiKhoan.trim() == "" ||
-      loginInfo.matKhau.trim() == ""
-    ) {
-      return alert("Vui long nhap day du thong tin");
-    } else {
-      await dispatch(login(loginInfo));
-      if (user?.maLoaiNguoiDung === "GV") {
+    console.log(loginInfo);    
+
+    await AuthService.login(loginInfo).then((res)=>{
+      console.log("res", res);
+      dispatch({
+        type: "LOGIN",
+        payload: res.data.content
+    })
+      localStorage.setItem("TOKEN", res.data.content.accessToken);
+      localStorage.setItem("USER_LOGIN", JSON.stringify(res.data.content))
+        
+      if(res.data.content.maLoaiNguoiDung==="QuanTri"){
+        console.log("login ok");
         return navigate("/admin");
-      } else {
+      }else{
         return navigate("/");
       }
-    }
+    }).catch((error)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.response.data.content,
+        
+      })
+      
+    })
   };
 
   return (

@@ -18,6 +18,8 @@ import {
 import LayoutAdmin from "../../../HOCs/LayoutAdmin";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import './User.css'
+import { movieList } from "../services/adminService";
+import Swal from 'sweetalert2'
 const { confirm } = Modal;
 const { Search } = Input;
 
@@ -114,8 +116,16 @@ const User = () => {
                       <span>
                         <EditOutlined
                           className="text-2xl"
-                          onClick={() => {
-                            navigate("/admin/user/edituser/" + item.taiKhoan);
+                          onClick={async () => {
+                            await movieList.getUserItem(item.taiKhoan).then(async(res)=>{
+                              
+                              await dispatch({
+                                type: "SET_USER_ITEM",
+                                payload: res.data.content
+                              }) 
+                              navigate("/admin/user/edituser/" + item.taiKhoan);
+                            })
+                            
                           }}
                         />
 
@@ -128,7 +138,17 @@ const User = () => {
                               okText: "Yes",
                               okType: "danger",
                               cancelText: "No",
-                              onOk() {
+                              async onOk() {
+                                await movieList.deleteUser(item.taiKhoan).then((res)=>{
+                                  console.log("ok");
+                                }).catch((error)=>{
+                                  Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: error.response.data.content
+                                    
+                                  })
+                                })
                                 dispatch(deleteUser(item.taiKhoan));
                                 dispatch(
                                   fetchUserList(searchParam.get("page"))

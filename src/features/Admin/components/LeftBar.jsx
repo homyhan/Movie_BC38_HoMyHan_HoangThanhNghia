@@ -7,7 +7,7 @@ const LeftBar = () => {
   const redirect = (page) => {
     navigate("/" + page);
   };
-
+  const url = window.location.href;  
   return (
     <div className="w-full">
       <Button
@@ -15,6 +15,7 @@ const LeftBar = () => {
         onClick={() => {
           redirect("admin");
         }}
+        style={url.includes("admin/user")===false? {backgroundColor:'#ffd60a'}:null}
       >
         Movie Manager
       </Button>{" "}
@@ -24,6 +25,7 @@ const LeftBar = () => {
           redirect("admin/user");
         }}
         className="w-full rounded-none mb-2"
+        style={url.includes("admin/user")===true? {backgroundColor:'#ffd60a'}:null}
       >
         User Manager
       </Button>

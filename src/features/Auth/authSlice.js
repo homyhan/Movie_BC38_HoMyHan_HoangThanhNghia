@@ -7,8 +7,7 @@ const initialState ={
 export const authReducer = (state= initialState, {type, payload})=>{
     return produce(state, (darft)=>{
         if(type === "LOGIN"){
-            darft.user = payload
-            
+            darft.user = payload            
         }
         if(type === "LOGOUT"){
             darft.user = null;
