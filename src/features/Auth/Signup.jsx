@@ -7,6 +7,8 @@ import { HomeOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
 import "./Signup.css";
 import { useFormik } from "formik";
+import { AuthService } from "./services/AuthService";
+import Swal from 'sweetalert2'
 
 const Signup = () => {
   const formik = useFormik({
@@ -46,9 +48,19 @@ const Signup = () => {
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit: async (values) => {
-      await dispatch(signup(values));
-      navigate("/signin");
-      console.log("values", values);
+      // await dispatch(signup(values));
+      await AuthService.signup(values).then((res)=>{
+        navigate("/signin");
+      }).catch((error)=>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.content,
+          
+        })
+      })
+      
+      // console.log("values", values);
     },
   });
   const dispatch = useDispatch();
