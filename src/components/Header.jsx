@@ -9,6 +9,7 @@ const Header = () => {
   const userLogin = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const url = window.location.href;
   return (
     <div className="bg-black py-4">
       <div className="container flex mx-auto justify-between items-center content-header">
@@ -16,7 +17,7 @@ const Header = () => {
           <NavLink className="headermovie mr-4" to="/">
             CyberMovie
           </NavLink>
-          {userLogin?.maLoaiNguoiDung === 'QuanTri'?<NavLink className="text-white linkToAdmin" to="/admin">Admin</NavLink>:null}
+          {userLogin?.maLoaiNguoiDung === 'QuanTri'?<NavLink className="text-white linkToAdmin" style={url.includes("admin")===true? {color:'#ffd60a'}:null} to="/admin">Admin</NavLink>:null}
           
         </div>
 
